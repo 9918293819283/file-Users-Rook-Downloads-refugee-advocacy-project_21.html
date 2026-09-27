@@ -1,0 +1,2696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Refugee Advocacy Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2b2620;
+    --paper: #ede6d6;
+    --paper-light: #f6f1e6;
+    --stamp-red: #a33b2e;
+    --travel-blue: #24445c;
+    --gold: #a4823f;
+    --manila: #d8c9a3;
+    --rule: rgba(43,38,32,0.25);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+  }
+
+  .display {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  a { color: var(--travel-blue); }
+
+  /* ---------- topbar / passport strip ---------- */
+  .strip {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    padding: 10px 24px;
+    background: var(--ink);
+    color: var(--paper-light);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+  .strip span { opacity: 0.85; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+  }
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand {
+    font-family: 'Special Elite', monospace;
+    font-size: 1.05rem;
+  }
+  .navlinks {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .navlinks a {
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+  .navlinks a:hover { border-color: var(--stamp-red); }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+  }
+  .lang-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    padding: 5px 9px;
+    cursor: pointer;
+  }
+  .lang-btn:hover { border-color: var(--ink); }
+  .lang-btn.active { background: var(--ink); color: var(--paper-light); border-color: var(--ink); }
+
+  section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 90px 24px;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--stamp-red);
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    overflow: visible;
+  }
+  .hero-grid {
+    display: block;
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 22px;
+  }
+  .hero p.lede {
+    font-size: 1.15rem;
+    max-width: 46ch;
+    color: #40382d;
+  }
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    padding: 13px 22px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    display: inline-block;
+    transition: background .15s ease, color .15s ease;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper-light); }
+  .btn.primary:hover { background: var(--stamp-red); border-color: var(--stamp-red); }
+  .btn:not(.primary):hover { background: var(--ink); color: var(--paper-light); }
+
+  /* ---------- declaration / mission ---------- */
+  .declaration {
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    padding: 48px;
+    position: relative;
+  }
+  .declaration::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 40px; right: 40px;
+    border-top: 2px dashed var(--rule);
+  }
+  .declaration h2 { margin-top: 0; font-family: 'Source Serif 4', serif; font-weight: 600; }
+  .declaration p { font-size: 1.05rem; max-width: 62ch; }
+  .declaration .credit {
+    margin-top: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #5a5145;
+  }
+
+  h2.section-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 8px;
+  }
+  .section-sub {
+    color: #5a5145;
+    max-width: 60ch;
+    margin-bottom: 44px;
+  }
+
+  /* ---------- manifest / toolkit ---------- */
+  .manifest {
+    border: 1px solid var(--ink);
+  }
+  .manifest-row {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .manifest-row:last-child { border-bottom: none; }
+  .manifest-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--stamp-red);
+  }
+  .manifest-row h3 { margin: 0 0 4px; font-size: 1.08rem; }
+  .manifest-row p { margin: 0; font-size: 0.95rem; color: #5a5145; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 5px 10px;
+    white-space: nowrap;
+    justify-self: end;
+  }
+  .tag-btn {
+    background: none;
+    cursor: pointer;
+    border-color: var(--stamp-red);
+    color: var(--stamp-red);
+    font-weight: 600;
+    transition: background .15s ease, color .15s ease;
+  }
+  .tag-btn:hover { background: var(--stamp-red); color: var(--paper-light); }
+
+  /* ---------- guide / fact-sheet panels ---------- */
+  .guide-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease;
+  }
+  .guide-panel.open { max-height: 5000px; }
+  .guide-panel-inner {
+    border: 1px solid var(--ink);
+    border-top: none;
+    background: var(--paper-light);
+    padding: 40px;
+  }
+  .guide-panel h2 { margin: 6px 0 24px; }
+  .guide-panel h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--travel-blue);
+    margin: 28px 0 12px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+  }
+  .guide-panel h4:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+  .guide-panel ul { padding-left: 22px; }
+  .guide-panel li { margin-bottom: 10px; }
+  .fact-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+  .fact-tag {
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    text-align: center;
+    border: 1px solid;
+  }
+  .fact-tag.myth { color: var(--stamp-red); border-color: var(--stamp-red); }
+  .fact-tag.fact { color: var(--gold); border-color: var(--gold); margin-bottom: 20px; }
+  .fact-row p { margin: 0; }
+  .source-list { list-style: none; padding-left: 0; font-size: 0.82rem; }
+  .source-list li { margin-bottom: 8px; }
+  @media (max-width: 600px) {
+    .guide-panel-inner { padding: 26px; }
+    .fact-row { grid-template-columns: 56px 1fr; }
+  }
+
+  /* ---------- game ---------- */
+  .game-box {
+    border: 1px solid var(--ink);
+    background: var(--paper-light);
+    padding: 16px;
+    margin-top: 18px;
+  }
+  .game-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--ink);
+    background: #0d1620;
+  }
+  .game-hud-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .game-hud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 18px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .game-hud .hud-item { position: relative; display: flex; align-items: center; gap: 6px; }
+  .game-hud .hud-dots { letter-spacing: 1px; font-size: 1rem; }
+  .game-hud .hud-dots .filled { color: var(--stamp-red); }
+  .game-hud .hud-dots .empty { opacity: 0.3; filter: grayscale(1); }
+  .coin-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin: 0 1px;
+    vertical-align: middle;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 0.72rem;
+    line-height: 1;
+  }
+  .coin-icon.filled {
+    color: #7a5a1a;
+    background: #f0cf6e;
+    border: 1px solid #a4823f;
+  }
+  .coin-icon.empty {
+    color: var(--rule);
+    background: transparent;
+    border: 1px solid var(--rule);
+    opacity: 0.6;
+  }
+  .clock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    margin: 0 1px;
+    vertical-align: middle;
+  }
+  .clock-icon svg { display: block; }
+  .clock-icon.filled { color: var(--travel-blue); }
+  .clock-icon.empty {
+    color: var(--rule);
+    opacity: 0.5;
+  }
+  .game-hud .hud-item.pulse-bad .hud-dots { animation: hudPulseBad .5s ease; }
+  .game-hud .hud-item.pulse-good .hud-dots { animation: hudPulseGood .5s ease; }
+  @keyframes hudPulseBad {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.35); color: var(--stamp-red); }
+    100% { transform: scale(1); }
+  }
+  @keyframes hudPulseGood {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.35); color: var(--gold); }
+    100% { transform: scale(1); }
+  }
+  .float-delta {
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.85rem;
+    pointer-events: none;
+    animation: floatUp 1s ease forwards;
+    white-space: nowrap;
+  }
+  .float-delta.bad { color: var(--stamp-red); }
+  .float-delta.good { color: var(--gold); }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translate(-50%, 0); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -26px); }
+  }
+  .game-hud-btns { display: flex; gap: 8px; flex-shrink: 0; }
+  .mute-btn {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 6px 9px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .mute-btn:hover { border-color: var(--ink); }
+  .mute-btn.muted { opacity: 0.4; }
+
+  .game-box:fullscreen,
+  .game-box:-webkit-full-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: var(--paper-light);
+    box-sizing: border-box;
+    padding: 40px 6vw;
+    gap: 14px;
+  }
+  .game-box:fullscreen .game-hud-row,
+  .game-box:-webkit-full-screen .game-hud-row,
+  .game-box:fullscreen .game-toast,
+  .game-box:-webkit-full-screen .game-toast,
+  .game-box:fullscreen .game-canvas,
+  .game-box:-webkit-full-screen .game-canvas,
+  .game-box:fullscreen .game-stage,
+  .game-box:-webkit-full-screen .game-stage,
+  .game-box:fullscreen .reveal-btn,
+  .game-box:-webkit-full-screen .reveal-btn {
+    width: 100%;
+    max-width: 900px;
+    flex-shrink: 0;
+  }
+  .game-toast {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--stamp-red);
+    min-height: 18px;
+    margin-bottom: 8px;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .game-toast.show { opacity: 1; }
+  .game-toast.good { color: var(--gold); }
+  .game-stage {
+    margin-top: 12px;
+    min-height: 30px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .game-stage.visible { opacity: 1; transform: translateY(0); }
+  .game-stage .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    color: var(--stamp-red);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .game-stage h3 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 0 8px;
+  }
+  .game-stage p { font-size: 0.95rem; max-width: 62ch; margin: 0 0 8px; }
+  .game-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .game-choice-btn {
+    text-align: left;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.92rem;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: transform .12s ease, background .15s ease, color .15s ease, box-shadow .15s ease;
+  }
+  .game-choice-btn:hover { background: var(--ink); color: var(--paper-light); transform: translateY(-2px); box-shadow: 0 4px 0 rgba(43,38,32,0.25); }
+  .game-choice-btn:active { transform: translateY(1px); box-shadow: none; }
+  .game-ending-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 4px 10px;
+    margin-top: 20px;
+  }
+  .game-achievement {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--gold);
+    background: rgba(164,130,63,0.12);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    margin: 0 0 16px;
+    animation: achievePop .5s ease;
+  }
+  @keyframes achievePop {
+    0% { opacity: 0; transform: translateX(-8px) scale(0.96); }
+    100% { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  .qt-wrap { text-align: center; }
+  .qt-counter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--stamp-red);
+    margin: 10px 0;
+    display: inline-block;
+    transition: transform .08s ease;
+  }
+  .qt-counter.bump { transform: scale(1.25); }
+  .qt-bar-track {
+    width: 100%;
+    height: 10px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    margin: 14px 0 20px;
+  }
+  .qt-bar-fill {
+    height: 100%;
+    background: var(--stamp-red);
+    width: 100%;
+    transition: width linear;
+  }
+  .qt-tap-btn {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    background: var(--ink);
+    color: var(--paper-light);
+    border: none;
+    padding: 22px 40px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform .1s ease;
+  }
+  .qt-tap-btn:hover { transform: scale(1.04); }
+  .qt-tap-btn:active { background: var(--stamp-red); transform: scale(0.94); }
+  .title-btn-wrap { text-align: center; margin-top: 26px; }
+  @media (prefers-reduced-motion: reduce) {
+    .game-stage { transition: none; }
+    .game-achievement { animation: none; }
+  }
+  @media (max-width: 600px) {
+    .game-box { padding: 16px; }
+  }
+
+  /* ---------- activity player (slideshow overlay) ---------- */
+  .player-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    color: var(--paper-light);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+  }
+  .player-overlay.open { display: flex; }
+
+  .player-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    border-bottom: 1px solid rgba(246,241,230,0.2);
+    flex-shrink: 0;
+  }
+  .player-top .brand-mini {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.95rem;
+  }
+  .player-progress {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--manila);
+  }
+  .player-close {
+    background: none;
+    border: 1px solid rgba(246,241,230,0.4);
+    color: var(--paper-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  .player-close:hover { border-color: var(--stamp-red); color: var(--stamp-red); }
+
+  .player-stage {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
+
+  .slide {
+    display: none;
+    max-width: 720px;
+    width: 100%;
+    animation: slideIn .35s ease;
+  }
+  .slide.active { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .slide h2 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0 0 20px;
+    line-height: 1.25;
+  }
+  .slide p, .slide li { font-size: 1.05rem; }
+  .slide .meta-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--manila);
+    margin-bottom: 26px;
+  }
+  .slide blockquote {
+    margin: 20px 0;
+    padding: 22px 26px;
+    background: rgba(246,241,230,0.06);
+    border-left: 3px solid var(--stamp-red);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+  .slide ul.setup-list {
+    columns: 2;
+    column-gap: 30px;
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.98rem;
+  }
+  .slide ul.setup-list li {
+    margin-bottom: 8px;
+    break-inside: avoid;
+  }
+  .slide ul.setup-list li::before { content: "· "; color: var(--gold); }
+  .slide ol li, .slide ul:not(.setup-list) li { margin-bottom: 12px; }
+
+  .slide .callout {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-family: 'Source Serif 4', serif;
+  }
+
+  /* timer widget */
+  .timer-widget {
+    margin-top: 26px;
+    padding: 24px;
+    border: 1px solid rgba(246,241,230,0.25);
+    text-align: center;
+  }
+  .timer-display {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 3rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 14px;
+  }
+  .timer-display.warn { color: var(--stamp-red); }
+  .timer-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--manila);
+    margin-bottom: 16px;
+  }
+  .timer-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    background: var(--stamp-red);
+    color: var(--paper-light);
+    border: none;
+    padding: 12px 22px;
+    cursor: pointer;
+  }
+  .timer-btn:hover { background: #8a2f24; }
+  .timer-btn:disabled { background: #5a5145; cursor: default; }
+  .timer-done {
+    margin-top: 12px;
+    font-family: 'Special Elite', monospace;
+    color: var(--gold);
+    display: none;
+  }
+  .timer-done.show { display: block; }
+
+  /* vote widget (Stay or Go) */
+  .vote-widget {
+    margin-top: 26px;
+    padding: 24px;
+    border: 1px solid rgba(246,241,230,0.25);
+  }
+  .vote-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--manila);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .vote-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .vote-btn {
+    flex: 1;
+    min-width: 130px;
+    max-width: 220px;
+    font-family: 'Special Elite', monospace;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background: none;
+    border: 1.5px solid var(--paper-light);
+    color: var(--paper-light);
+    padding: 16px 12px;
+    cursor: pointer;
+    text-align: center;
+  }
+  .vote-btn:hover { background: rgba(246,241,230,0.1); }
+  .vote-btn.picked { background: var(--stamp-red); border-color: var(--stamp-red); }
+  .vote-count {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    margin-top: 8px;
+    color: var(--manila);
+  }
+  .reveal-btn {
+    display: block;
+    margin: 20px auto 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 10px 18px;
+    cursor: pointer;
+  }
+  .reveal-btn:hover { background: var(--gold); color: var(--ink); }
+  .complication {
+    margin-top: 18px;
+    padding: 18px 20px;
+    background: rgba(246,241,230,0.06);
+    border-left: 3px solid var(--gold);
+    font-style: italic;
+    font-size: 0.98rem;
+    display: none;
+  }
+  .complication.show { display: block; }
+
+  @media (max-width: 600px) {
+    .vote-btn { min-width: 100%; }
+  }
+
+  .player-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    border-top: 1px solid rgba(246,241,230,0.2);
+    flex-shrink: 0;
+  }
+  .player-nav-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    background: none;
+    border: 1.5px solid var(--paper-light);
+    color: var(--paper-light);
+    padding: 11px 20px;
+    cursor: pointer;
+  }
+  .player-nav-btn:hover:not(:disabled) { background: var(--paper-light); color: var(--ink); }
+  .player-nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+  .dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(246,241,230,0.3);
+  }
+  .dots span.active { background: var(--stamp-red); }
+
+  @media (max-width: 600px) {
+    .slide ul.setup-list { columns: 1; }
+    .player-top, .player-bottom { padding: 14px 18px; }
+    .player-stage { padding: 24px 18px; }
+    .dots { display: none; }
+  }
+
+  /* ---------- itinerary / events ---------- */
+  .tier {
+    margin-bottom: 34px;
+    border-left: 3px solid var(--travel-blue);
+    padding-left: 24px;
+  }
+  .tier h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--travel-blue);
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+  }
+  .tier ul { margin: 0; padding-left: 20px; }
+  .tier li { margin-bottom: 8px; }
+
+  /* ---------- team ---------- */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .id-card {
+    border: 1px solid var(--ink);
+    background: var(--paper-light);
+    padding: 24px;
+    position: relative;
+  }
+  .id-card .role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    color: var(--stamp-red);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .id-card h3 { margin: 0 0 6px; font-size: 1.25rem; font-family: 'Source Serif 4', serif; font-weight: 600; }
+  .id-card p { font-size: 0.9rem; color: #5a5145; margin: 0; }
+  .id-card::after {
+    content: "";
+    position: absolute;
+    bottom: 14px; right: 14px;
+    width: 34px; height: 34px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ---------- involve ---------- */
+  .involve-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  .involve-card {
+    border: 1.5px dashed var(--rule);
+    padding: 26px;
+  }
+  .involve-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+  .involve-card p { font-size: 0.92rem; color: #5a5145; margin: 0 0 14px; }
+  .fillin {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 2px;
+    color: var(--ink);
+  }
+
+  footer {
+    border-top: 2px solid var(--ink);
+    padding: 30px 24px 40px;
+    text-align: center;
+  }
+  footer p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #5a5145;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 4px 0;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 720px) {
+    .manifest-row { grid-template-columns: 1fr; gap: 6px; }
+    .manifest-num { order: 2; }
+    .tag { justify-self: start; }
+    section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="strip mono">
+  <span>Working title</span>
+  <span>Austin, TX</span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">The Refugee Advocacy Project</div>
+    <div class="navlinks">
+      <a href="#mission" data-i18n="nav.mission">Mission</a>
+      <a href="#activity" data-i18n="nav.activity">The Activity</a>
+      <a href="#events" data-i18n="nav.events">Events</a>
+      <a href="#game" data-i18n="nav.game">The Game</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#involve" data-i18n="nav.involve">Get Involved</a>
+    </div>
+    <div class="lang-switch mono" id="lang-switch">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow mono" data-i18n="hero.eyebrow">A student-built initiative</span>
+      <h1 class="display" data-i18n="hero.title">What would you carry, if you had ten minutes to leave everything behind?</h1>
+      <p class="lede" data-i18n="hero.lede">We're a group of students turning a single classroom activity into something any school, library, or living room can run — so more people understand what it actually means to become a refugee.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#activity" data-i18n="hero.cta1">See the activity</a>
+        <a class="btn" href="#involve" data-i18n="hero.cta2">Get involved</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mission" class="reveal">
+  <span class="eyebrow mono" data-i18n="mission.eyebrow">Why this exists</span>
+  <h2 class="section-title" data-i18n="mission.title">Most people know refugees exist. Few have had to imagine packing one bag for the rest of their life.</h2>
+  <div class="declaration" style="margin-top:32px;">
+    <p data-i18n="mission.p1">This project started as a classroom activity at Kealing Middle School in 2023, where students had minutes to decide what a family would take if they were leaving home and never coming back. This meant deciding what was left behind. This hands-on activity required 6th graders to work together to make quick decisions and gain some understanding about the refugee process. We think this issue deserves a wider audience.</p>
+    <p data-i18n="mission.p2">We are rebuilding this project as something that isn't locked to one classroom: a toolkit that any teacher, librarian, or community group can pick up and run themselves, alongside public events that put awareness in front of a community that doesn't always get the chance to sit with this.</p>
+    <p class="credit" data-i18n="mission.credit">Original scenarios developed at Kealing Middle School, with materials contributed by Ms. Dita.</p>
+  </div>
+</section>
+
+<section id="activity" class="reveal">
+  <span class="eyebrow mono" data-i18n="activity.eyebrow">The toolkit</span>
+  <h2 class="section-title" data-i18n="activity.title">Here's what's going in the bag</h2>
+  <p class="section-sub" data-i18n="activity.sub">We're building this as a facilitator-ready kit, sourced in part from UNHCR's own resources, so the exercise carries the same weight wherever it's run.</p>
+  <div class="manifest">
+    <div class="manifest-row">
+      <span class="manifest-num mono">ITEM 01</span>
+      <div>
+        <h3 data-i18n="item3.title">Facilitator guide</h3>
+        <p data-i18n="item3.desc">Everything a teacher or group leader needs to run the activity cold — timing, discussion prompts, and debrief questions.</p>
+      </div>
+      <button class="tag tag-btn" id="guide-toggle" data-i18n="item3.btn">Read guide</button>
+    </div>
+    <div class="manifest-row">
+      <span class="manifest-num mono">ITEM 02</span>
+      <div>
+        <h3 data-i18n="item1.title">What's in My Bag</h3>
+        <p data-i18n="item1.desc">Participants have minutes to choose what fits in a single bag before they have to leave. What they keep, and what they can't, is the whole lesson.</p>
+      </div>
+      <button class="tag tag-btn" id="script-toggle" data-i18n="item1.btn">Launch activity</button>
+    </div>
+    <div class="manifest-row">
+      <span class="manifest-num mono">ITEM 03</span>
+      <div>
+        <h3 data-i18n="item2.title">Stay or Go</h3>
+        <p data-i18n="item2.desc">A set of scenario cards where participants weigh real decisions displaced families face — with no clean answer to any of them.</p>
+      </div>
+      <button class="tag tag-btn" id="stayorgo-toggle" data-i18n="item2.btn">Launch activity</button>
+    </div>
+    <div class="manifest-row">
+      <span class="manifest-num mono">ITEM 04</span>
+      <div>
+        <h3 data-i18n="item4.title">Fact sheet &amp; sources</h3>
+        <p data-i18n="item4.desc">Plain-language context on who refugees are and aren't, pulled from UNHCR and other primary sources — built to correct common myths.</p>
+      </div>
+      <button class="tag tag-btn" id="facts-toggle" data-i18n="item4.btn">Read fact sheet</button>
+    </div>
+  </div>
+
+  <div class="guide-panel" id="guide-panel">
+    <div class="guide-panel-inner">
+      <span class="eyebrow mono" data-i18n="guide.kicker">Item 03 &mdash; facilitator guide</span>
+      <h2 class="display" data-i18n="guide.title">Running the full session</h2>
+
+      <h4 data-i18n="guide.h1">Suggested agenda (60&ndash;75 min)</h4>
+      <ul>
+        <li data-i18n="guide.agenda1">Intro &amp; framing &mdash; 5 min</li>
+        <li data-i18n="guide.agenda2">What's in My Bag &mdash; 25&ndash;35 min, including debrief</li>
+        <li data-i18n="guide.agenda3">Short break &mdash; 5 min</li>
+        <li data-i18n="guide.agenda4">Stay or Go &mdash; 25&ndash;35 min, including debrief</li>
+        <li data-i18n="guide.agenda5">Fact sheet &amp; closing &mdash; 10 min</li>
+      </ul>
+
+      <h4 data-i18n="guide.h2">Room setup checklist</h4>
+      <ul>
+        <li data-i18n="guide.setup1">A visible timer or countdown (built into Item 01)</li>
+        <li data-i18n="guide.setup2">Two clear zones of the room, labeled STAY and GO</li>
+        <li data-i18n="guide.setup3">Index cards if running the physical version of What's in My Bag</li>
+        <li data-i18n="guide.setup4">A projector or shared screen, if running the digital activities as a class</li>
+      </ul>
+
+      <h4 data-i18n="guide.h3">Facilitation principles</h4>
+      <ul>
+        <li data-i18n="guide.p1">Keep the framing serious. These activities work because the pressure is real, not performed.</li>
+        <li data-i18n="guide.p2">Don't rush the debrief. The silence after a hard question is doing work &mdash; let it sit.</li>
+        <li data-i18n="guide.p3">Give a quiet opt-out. Some participants may have a personal connection to displacement; let them observe instead of participate, without singling them out.</li>
+        <li data-i18n="guide.p4">Close every session with the fact sheet, so the emotional weight of the activity lands on real information, not just a feeling.</li>
+        <li data-i18n="guide.p5">Preview The Journey before running it with a group. Some paths include a family member not surviving the trip &mdash; a real and common part of displacement, but worth knowing about in advance so you can decide how to introduce it.</li>
+      </ul>
+
+      <p class="credit" data-i18n="guide.credit">Original scenarios developed at Kealing Middle School, with materials contributed by Ms. Dita.</p>
+    </div>
+  </div>
+
+  <div class="guide-panel" id="facts-panel">
+    <div class="guide-panel-inner">
+      <span class="eyebrow mono" data-i18n="facts.kicker">Item 04 &mdash; fact sheet</span>
+      <h2 class="display" data-i18n="facts.title">Myths and facts</h2>
+
+      <div class="fact-row">
+        <span class="fact-tag myth mono" data-i18n="facts.myth">MYTH</span>
+        <p data-i18n="facts.m1">Most refugees resettle in wealthy Western countries.</p>
+      </div>
+      <div class="fact-row">
+        <span class="fact-tag fact mono" data-i18n="facts.fact">FACT</span>
+        <p data-i18n="facts.f1">The large majority are hosted by neighboring low- and middle-income countries, not by wealthy nations far away.</p>
+      </div>
+
+      <div class="fact-row">
+        <span class="fact-tag myth mono" data-i18n="facts.myth">MYTH</span>
+        <p data-i18n="facts.m2">Refugees choose to leave for economic opportunity, like other migrants.</p>
+      </div>
+      <div class="fact-row">
+        <span class="fact-tag fact mono" data-i18n="facts.fact">FACT</span>
+        <p data-i18n="facts.f2">Refugees are fleeing persecution, conflict, or violence, and are protected under international law in a category distinct from economic migration.</p>
+      </div>
+
+      <div class="fact-row">
+        <span class="fact-tag myth mono" data-i18n="facts.myth">MYTH</span>
+        <p data-i18n="facts.m3">Seeking asylum is a quick or automatic process.</p>
+      </div>
+      <div class="fact-row">
+        <span class="fact-tag fact mono" data-i18n="facts.fact">FACT</span>
+        <p data-i18n="facts.f3">Asylum and resettlement processes often take years, with rigorous vetting at every stage.</p>
+      </div>
+
+      <div class="fact-row">
+        <span class="fact-tag myth mono" data-i18n="facts.myth">MYTH</span>
+        <p data-i18n="facts.m4">Once someone is a refugee, that status is permanent.</p>
+      </div>
+      <div class="fact-row">
+        <span class="fact-tag fact mono" data-i18n="facts.fact">FACT</span>
+        <p data-i18n="facts.f4">Most refugees hope to return home, and many do when conditions allow — though displacement often lasts far longer than anyone expects at the start.</p>
+      </div>
+
+      <h4 style="margin-top:32px;" data-i18n="facts.realH">What people actually carry</h4>
+      <p data-i18n="facts.realIntro">Across recent crises, the same handful of items shows up again and again &mdash; alongside whatever else a family can't bring itself to leave behind.</p>
+      <ul class="source-list mono" style="list-style:disc; padding-left:20px;">
+        <li data-i18n="facts.real1"><strong>Ukraine:</strong> money, passports, identification papers, food</li>
+        <li data-i18n="facts.real2"><strong>South Sudan:</strong> money, passports, identification papers, food</li>
+        <li data-i18n="facts.real3"><strong>Afghanistan:</strong> money, passports, identification papers, food, a Quran</li>
+        <li data-i18n="facts.real4"><strong>DRC:</strong> money, passports, identification papers, food</li>
+      </ul>
+
+      <h4 style="margin-top:32px;" data-i18n="facts.sources_h">Sources for further reading</h4>
+      <ul class="source-list mono">
+        <li><a href="https://www.unrefugees.org/news/myths-and-facts-about-refugees-in-the-united-states/" target="_blank" rel="noopener">unrefugees.org &mdash; Myths and facts about refugees in the US</a></li>
+        <li><a href="https://www.rescue.org/uk/article/11-myths-and-misconceptions-about-refugees-debunked" target="_blank" rel="noopener">rescue.org (IRC) &mdash; Myths and misconceptions about refugees</a></li>
+        <li><a href="https://cipr.du.edu/content/overcoming-misconceptions-just-one-many-hurdles-us-immigration" target="_blank" rel="noopener">cipr.du.edu &mdash; Overcoming misconceptions in US immigration</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="events" class="reveal">
+  <span class="eyebrow mono" data-i18n="events.eyebrow">Where this goes next</span>
+  <h2 class="section-title" data-i18n="events.title">A slate of events, sized from easy to ambitious</h2>
+  <p class="section-sub" data-i18n="events.sub">Nothing below is booked yet — this is the roadmap we're working from.</p>
+
+  <div class="tier">
+    <h3 data-i18n="tier1.h">Community — the near-term plan</h3>
+    <ul>
+      <li data-i18n="tier1.li1">Film screenings paired with fundraisers for a refugee or asylee nonprofit</li>
+      <li data-i18n="tier1.li2">Discussion panels open to the wider community</li>
+      <li data-i18n="tier1.li3">Free bookmarks with book, film, and stat recommendations, distributed at libraries and bookstores</li>
+    </ul>
+  </div>
+
+  <div class="tier">
+    <h3 data-i18n="tier2.h">Campus</h3>
+    <ul>
+      <li data-i18n="tier2.li1">Bringing the Kealing-style activity to other AISD middle schools</li>
+    </ul>
+  </div>
+
+  <div class="tier">
+    <h3 data-i18n="tier3.h">On the road</h3>
+    <ul>
+      <li data-i18n="tier3.li1">A pop-up at CANOA in New Orleans</li>
+    </ul>
+  </div>
+</section>
+
+<section id="game" class="reveal" style="padding-top:50px; padding-bottom:50px;">
+  <span class="eyebrow mono" data-i18n="game.eyebrow">Play it yourself</span>
+  <h2 class="section-title" data-i18n="game.title">The Journey</h2>
+  <p class="section-sub" data-i18n="game.sub">A short, single-player decision game. There's no winning move &mdash; only different costs.</p>
+  <div class="game-box" id="game-box">
+    <div class="game-hud-row">
+      <div class="game-hud mono" id="game-hud"></div>
+      <div class="game-hud-btns">
+        <button class="mute-btn" id="game-mute" aria-label="Toggle sound" type="button">&#128266;</button>
+        <button class="mute-btn" id="game-fullscreen" aria-label="Toggle fullscreen" type="button">&#9974;</button>
+      </div>
+    </div>
+    <div class="game-toast mono" id="game-toast"></div>
+    <canvas id="game-canvas" class="game-canvas" width="700" height="180"></canvas>
+    <div class="game-stage" id="game-stage"></div>
+    <button class="reveal-btn" id="game-restart" data-i18n="game.restart" style="margin-top:12px;">Start over</button>
+  </div>
+</section>
+
+<section id="team" class="reveal">
+  <span class="eyebrow mono" data-i18n="team.eyebrow">Who's building this</span>
+  <h2 class="section-title" data-i18n="team.title">Founding team</h2>
+  <div class="team-grid" style="margin-top:32px;">
+    <div class="id-card">
+      <span class="role mono" data-i18n="team.role">Founding member</span>
+      <h3>Kaius</h3>
+      <p data-i18n="team.cofounder">Co-founder</p>
+    </div>
+    <div class="id-card">
+      <span class="role mono" data-i18n="team.role">Founding member</span>
+      <h3>Mauricio</h3>
+      <p data-i18n="team.cofounder">Co-founder</p>
+    </div>
+    <div class="id-card">
+      <span class="role mono" data-i18n="team.role">Founding member</span>
+      <h3>Rook</h3>
+      <p data-i18n="team.cofounder">Co-founder</p>
+    </div>
+  </div>
+</section>
+
+<section id="involve" class="reveal">
+  <span class="eyebrow mono" data-i18n="involve.eyebrow">Get involved</span>
+  <h2 class="section-title" data-i18n="involve.title">Three ways in</h2>
+  <div class="involve-grid" style="margin-top:32px;">
+    <div class="involve-card">
+      <h3 data-i18n="involve.c1h">Bring it to your school</h3>
+      <p data-i18n="involve.c1p">Want to run the activity with your class or club?</p>
+      <span class="fillin" data-i18n="involve.contact">contact: [add email]</span>
+    </div>
+    <div class="involve-card">
+      <h3 data-i18n="involve.c2h">Help at an event</h3>
+      <p data-i18n="involve.c2p">Screenings and panels need hands before and during.</p>
+      <span class="fillin" data-i18n="involve.contact">contact: [add email]</span>
+    </div>
+    <div class="involve-card">
+      <h3 data-i18n="involve.c3h">Follow along</h3>
+      <p data-i18n="involve.c3p">Get word when the toolkit and first events go live.</p>
+      <span class="fillin" data-i18n="involve.signup">[add sign-up link]</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p data-i18n="footer.l1">The Refugee Advocacy Project &mdash; working title</p>
+  <p data-i18n="footer.l2">Built by students &middot; Austin, TX</p>
+</footer>
+
+<div class="player-overlay" id="player-overlay" role="dialog" aria-modal="true" aria-label="What's in My Bag — activity player">
+  <div class="player-top">
+    <span class="brand-mini">What's in My Bag</span>
+    <span class="player-progress"><span id="slide-current">1</span> / <span id="slide-total">7</span></span>
+    <button class="player-close" id="player-close">Close ✕</button>
+  </div>
+
+  <div class="player-stage">
+
+    <div class="slide active" data-slide="1">
+      <span class="kicker">Item 01 &middot; Facilitator-led</span>
+      <h2>What's in My Bag</h2>
+      <p class="meta-line">A timed-decision simulation on displacement &nbsp;&middot;&nbsp; Group size: 15&ndash;40 &nbsp;&middot;&nbsp; Time: 25&ndash;35 min &nbsp;&middot;&nbsp; Age: middle school and up</p>
+      <p>This is a live-run activity, meant to be projected or read aloud. Step through each slide with your class &mdash; the timers are built in.</p>
+    </div>
+
+    <div class="slide" data-slide="2">
+      <span class="kicker">Before you begin</span>
+      <h2>Setup</h2>
+      <p>Give each participant (or small group of 2&ndash;3) an index card listing household items &mdash; mix the mundane and the precious:</p>
+      <ul class="setup-list">
+        <li>Passport / ID papers</li>
+        <li>Phone + charger</li>
+        <li>Universal adapter/converter</li>
+        <li>Family photo album</li>
+        <li>School records/diplomas/transcript</li>
+        <li>Cash</li>
+        <li>Credit cards</li>
+        <li>Prescription medication</li>
+        <li>Matches/lighter</li>
+        <li>Book(s)</li>
+        <li>Stuffed animal</li>
+        <li>Small toys</li>
+        <li>Winter coat</li>
+        <li>Laptop</li>
+        <li>Family heirlooms (small silver photo frame, military medals, plaques)</li>
+        <li>Small jewelry box (wedding rings, gold and silver necklaces, bracelets, rings, earrings)</li>
+        <li>Box of documents (car and/or house deed, lease agreements, birth certificates, employment letters, paystubs, passwords)</li>
+        <li>First aid kit (bandages, ointment, antiseptic spray, pain medicine)</li>
+        <li>A religious or cultural object</li>
+        <li>Water bottle</li>
+        <li>Water filter</li>
+        <li>Towel</li>
+        <li>Bed sheets</li>
+        <li>Small laundry detergent</li>
+        <li>Blanket</li>
+        <li>Stroller</li>
+        <li>Baby sling</li>
+        <li>Hammock</li>
+        <li>A change of clothes per family member</li>
+        <li>Personal hygiene kit (soap, shampoo, toothbrushes and toothpaste)</li>
+        <li>Address book</li>
+        <li>Non-perishable food</li>
+        <li>Small pot and pan</li>
+        <li>Kitchen utensils (one set of knife, fork and spoon)</li>
+        <li>Ladle/serving spoon</li>
+        <li>Toilet paper</li>
+        <li>Can opener</li>
+        <li>Disposable plates, napkins and cups</li>
+        <li>Inflatable pool ring</li>
+        <li>A musical instrument</li>
+        <li>A diary or personal journal</li>
+        <li>Old letters/postcards</li>
+        <li>A toolset (hammer, rope, screwdriver, nails)</li>
+        <li>Batteries</li>
+        <li>Flashlight</li>
+      </ul>
+      <p>One bag per person or group &mdash; real objects and props, or a taped outline the size of a school backpack. The size should visibly fit only 6&ndash;8 items, not all of them.</p>
+    </div>
+
+    <div class="slide" data-slide="3">
+      <span class="kicker">Round 1 &middot; read this aloud, don't paraphrase</span>
+      <h2>4 a.m.</h2>
+      <blockquote>"It's 4 a.m. Someone is pounding on your door. A neighbor is shouting that the checkpoint down the road has fallen and the road out of the city will close by morning. You will not be coming back &mdash; not this week, not maybe ever.<br><br>You have one bag. Whatever doesn't fit, stays. You have 90 seconds. Go."</blockquote>
+      <div class="timer-widget" data-seconds="90" data-timer-id="t1">
+        <div class="timer-label">Round 1 &mdash; pack the bag</div>
+        <div class="timer-display">01:30</div>
+        <button class="timer-btn">Start 90-second timer</button>
+        <div class="timer-done">"Bags down. Hands off."</div>
+      </div>
+    </div>
+
+    <div class="slide" data-slide="4">
+      <span class="kicker">Round 2 &middot; the twist &mdash; don't skip this</span>
+      <h2>New information</h2>
+      <blockquote>"The road you were planning to take is a mountain path &mdash; no vehicles. Everything you're carrying, you carry on your back for three days. Look at your bag. You have 30 seconds to drop down to 5 items."</blockquote>
+      <div class="timer-widget" data-seconds="30" data-timer-id="t2">
+        <div class="timer-label">Round 2 &mdash; cut down to 5</div>
+        <div class="timer-display">00:30</div>
+        <button class="timer-btn">Start 30-second timer</button>
+        <div class="timer-done">"Bags down. Hands off."</div>
+      </div>
+      <p style="margin-top:22px;">Round 1 is about instinct. Round 2 is about triage &mdash; that's the actual lesson.</p>
+    </div>
+
+    <div class="slide" data-slide="5">
+      <span class="kicker">Debrief &middot; 10&ndash;15 min &mdash; ask in order, don't rush past silence</span>
+      <h2>Talk it through</h2>
+      <ol>
+        <li>"What's the first thing you grabbed, before you even thought?"</li>
+        <li>"What did you put in, then take back out in round 2? Why that one?"</li>
+        <li>"Was there anything you wanted to bring that wasn't on the card at all?"</li>
+        <li>"Who did you make this decision for &mdash; just yourself, or other people too?"</li>
+        <li>"Real families don't get a card with 20 options pre-picked for them, and they don't get a do-over. What does that change about how you'd choose?"</li>
+      </ol>
+    </div>
+
+    <div class="slide" data-slide="6">
+      <span class="kicker">While you debrief</span>
+      <h2>Facilitator notes</h2>
+      <ul>
+        <li>Don't let round 1 become a game to "win" by being clever. There isn't a best answer.</li>
+        <li>Watch for any students who go quiet. This might be hard for kids with any personal or family connection to displacement. We have found that the students who have experience with displacement understand this activity better than the rest of the students, and they have been eager to take charge of the activity. However, if there is a student who feels this activity is too emotionally difficult, have the student engage in alternate activities such as journaling or quiet reflection.</li>
+        <li>Have tissues visible but don't announce them.</li>
+      </ul>
+    </div>
+
+    <div class="slide" data-slide="7">
+      <span class="kicker">Close</span>
+      <h2>One fact, stated plainly</h2>
+      <p class="callout">Most displaced people leave with what they can carry in minutes, expecting to return within weeks &mdash; and the median length of displacement worldwide is well over a decade.</p>
+    </div>
+
+  </div>
+
+  <div class="player-bottom">
+    <button class="player-nav-btn" id="player-prev">&larr; Prev</button>
+    <div class="dots" id="player-dots"></div>
+    <button class="player-nav-btn" id="player-next">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="player-overlay" id="stayorgo-overlay" role="dialog" aria-modal="true" aria-label="Stay or Go — activity player">
+  <div class="player-top">
+    <span class="brand-mini">Stay or Go</span>
+    <span class="player-progress"><span id="sog-current">1</span> / <span id="sog-total">8</span></span>
+    <button class="player-close" id="sog-close">Close ✕</button>
+  </div>
+
+  <div class="player-stage">
+
+    <div class="slide active" data-slide="1">
+      <span class="kicker">Item 02 &middot; Facilitator-led</span>
+      <h2>Stay or Go</h2>
+      <p class="meta-line">A scenario-based discussion on displacement decisions &nbsp;&middot;&nbsp; Group size: 10&ndash;40 &nbsp;&middot;&nbsp; Time: 25&ndash;35 min &nbsp;&middot;&nbsp; Age: middle school and up</p>
+      <p>Four scenarios, each with a hidden complication. Participants take a side before hearing the whole story &mdash; and usually find out there wasn't a clean answer to begin with.</p>
+    </div>
+
+    <div class="slide" data-slide="2">
+      <span class="kicker">Before you begin</span>
+      <h2>Setup</h2>
+      <ul>
+        <li>Label two sides of the room <strong>STAY</strong> and <strong>GO</strong>. Participants can physically move to a side, or you can run it as a show of hands and use the vote counters on each slide to tally.</li>
+        <li>Read each scenario aloud, let the group commit to a side, <em>then</em> reveal the complication &mdash; not before.</li>
+        <li>There is no correct answer in any scenario. Resist telling students which choice was "right."</li>
+      </ul>
+    </div>
+
+    <div class="slide" data-slide="3">
+      <span class="kicker">Scenario 1</span>
+      <h2>The Last Checkpoint</h2>
+      <p>You've reached the final checkpoint before the border closes for the night. The guard says only people holding valid papers may cross tonight. Yours are valid. Your grandmother's were destroyed when soldiers searched your home last month, and there's no time to replace them before curfew.</p>
+      <p><strong>Do you cross without her, hoping to bring her later &mdash; or stay together, and risk the border closing for good?</strong></p>
+      <div class="vote-widget" data-vote-id="v1">
+        <div class="vote-label">Where does the room stand?</div>
+        <div class="vote-buttons">
+          <button class="vote-btn" data-choice="stay">Stay<span class="vote-count">0</span></button>
+          <button class="vote-btn" data-choice="go">Go<span class="vote-count">0</span></button>
+        </div>
+        <button class="reveal-btn">Reveal the complication</button>
+        <div class="complication">Families who split up at a checkpoint like this often aren't reunited for years, if ever &mdash; but families who stayed together sometimes found the border sealed permanently within days.</div>
+      </div>
+    </div>
+
+    <div class="slide" data-slide="4">
+      <span class="kicker">Scenario 2</span>
+      <h2>The Camp Choice</h2>
+      <p>You've been in a refugee camp with your two children for eight months. A caseworker says an official transfer to permanent housing in a safe country could take two to five years of waiting. A cousin offers to lend you money for a guide who says he can get your family across the nearest border unofficially &mdash; tonight.</p>
+      <p><strong>Do you wait for the slow, legal path &mdash; or go now, off the official record?</strong></p>
+      <div class="vote-widget" data-vote-id="v2">
+        <div class="vote-label">Where does the room stand?</div>
+        <div class="vote-buttons">
+          <button class="vote-btn" data-choice="stay">Stay<span class="vote-count">0</span></button>
+          <button class="vote-btn" data-choice="go">Go<span class="vote-count">0</span></button>
+        </div>
+        <button class="reveal-btn">Reveal the complication</button>
+        <div class="complication">The legal path is safer, but the wait can outlast a childhood. The unofficial route is faster, but has no protection if anything goes wrong along the way &mdash; for the family, or for the guide.</div>
+      </div>
+    </div>
+
+    <div class="slide" data-slide="5">
+      <span class="kicker">Scenario 3</span>
+      <h2>An Ocean Between</h2>
+      <p>Two years after fleeing, you've rebuilt something stable in a neighboring country &mdash; steady work, and your kids in school near their aunt and cousins, the only family you have left nearby. Then you're offered a resettlement slot in a country far away, with real opportunity for your children's future, but no one you know there.</p>
+      <p><strong>Do you stay near the family you have left &mdash; or go, for a future they might not otherwise get?</strong></p>
+      <div class="vote-widget" data-vote-id="v3">
+        <div class="vote-label">Where does the room stand?</div>
+        <div class="vote-buttons">
+          <button class="vote-btn" data-choice="stay">Stay<span class="vote-count">0</span></button>
+          <button class="vote-btn" data-choice="go">Go<span class="vote-count">0</span></button>
+        </div>
+        <button class="reveal-btn">Reveal the complication</button>
+        <div class="complication">Every year, some refugees turn down resettlement offers for exactly this reason &mdash; because no version of "better" exists that doesn't also mean leaving the last people who remember you from before.</div>
+      </div>
+    </div>
+
+    <div class="slide" data-slide="6">
+      <span class="kicker">Scenario 4</span>
+      <h2>When the Fighting Stops</h2>
+      <p>Three years after leaving, you hear the fighting near your old neighborhood has ended. Reports say your street is still standing, though power and water aren't reliable yet. Meanwhile, your children have just started to feel at home here &mdash; new friends, a school they like.</p>
+      <p><strong>Do you go home, to the place that's still yours &mdash; or stay, in the life your family has only just begun to rebuild?</strong></p>
+      <div class="vote-widget" data-vote-id="v4">
+        <div class="vote-label">Where does the room stand?</div>
+        <div class="vote-buttons">
+          <button class="vote-btn" data-choice="stay">Stay<span class="vote-count">0</span></button>
+          <button class="vote-btn" data-choice="go">Go<span class="vote-count">0</span></button>
+        </div>
+        <button class="reveal-btn">Reveal the complication</button>
+        <div class="complication">Ceasefires don't always hold, and "still standing" doesn't mean "safe to live in" &mdash; but many refugees say the hardest part of staying isn't the new country. It's the guilt of not going back.</div>
+      </div>
+    </div>
+
+    <div class="slide" data-slide="7">
+      <span class="kicker">Debrief &middot; 10&ndash;15 min &mdash; ask in order, don't rush past silence</span>
+      <h2>Talk it through</h2>
+      <ol>
+        <li>"Which scenario was hardest to decide? What made it hard?"</li>
+        <li>"Did anyone change their answer after hearing the complication? What changed your mind?"</li>
+        <li>"Was there ever a 'right' answer in any of these &mdash; or just trade-offs?"</li>
+        <li>"How did it feel to make one of these decisions for other people &mdash; a grandmother, a child &mdash; not just yourself?"</li>
+        <li>"These aren't hypothetical for millions of people. What would you want someone actually facing one of these to know?"</li>
+      </ol>
+    </div>
+
+    <div class="slide" data-slide="8">
+      <span class="kicker">Close</span>
+      <h2>No version of this loses nothing</h2>
+      <p class="callout">Every scenario had a cost on both sides. That's not a flaw in the activity &mdash; it's the actual shape of the decision, for real families making it right now.</p>
+    </div>
+
+  </div>
+
+  <div class="player-bottom">
+    <button class="player-nav-btn" id="sog-prev">&larr; Prev</button>
+    <div class="dots" id="sog-dots"></div>
+    <button class="player-nav-btn" id="sog-next">Next &rarr;</button>
+  </div>
+</div>
+
+<script>
+  function initTimers(root) {
+    const controllers = [];
+    root.querySelectorAll('.timer-widget').forEach(widget => {
+      const totalSeconds = parseInt(widget.dataset.seconds, 10);
+      const display = widget.querySelector('.timer-display');
+      const btn = widget.querySelector('.timer-btn');
+      const done = widget.querySelector('.timer-done');
+      const startLabel = btn.textContent;
+      let remaining = totalSeconds;
+      let intervalId = null;
+      let running = false;
+
+      function format(s) {
+        const m = Math.floor(s / 60).toString().padStart(2, '0');
+        const sec = (s % 60).toString().padStart(2, '0');
+        return `${m}:${sec}`;
+      }
+
+      function tick() {
+        remaining -= 1;
+        display.textContent = format(remaining);
+        if (remaining <= 10) display.classList.add('warn');
+        if (remaining <= 0) {
+          clearInterval(intervalId);
+          intervalId = null;
+          running = false;
+          done.classList.add('show');
+          btn.textContent = 'Restart timer';
+          display.classList.remove('warn');
+        }
+      }
+
+      function pause() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = null;
+        running = false;
+        btn.textContent = 'Resume';
+      }
+
+      function resume() {
+        running = true;
+        btn.textContent = 'Pause';
+        tick();
+        if (running) intervalId = setInterval(tick, 1000);
+      }
+
+      function reset() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = null;
+        running = false;
+        remaining = totalSeconds;
+        display.textContent = format(remaining);
+        display.classList.remove('warn');
+        done.classList.remove('show');
+        btn.textContent = startLabel;
+      }
+
+      btn.addEventListener('click', () => {
+        if (remaining <= 0) { reset(); return; }
+        if (running) {
+          pause();
+        } else if (intervalId === null && btn.textContent === startLabel) {
+          done.classList.remove('show');
+          resume();
+        } else {
+          resume();
+        }
+      });
+
+      controllers.push({ reset });
+    });
+    return controllers;
+  }
+
+  function initVotes(root) {
+    const controllers = [];
+    root.querySelectorAll('.vote-widget').forEach(widget => {
+      const stayBtn = widget.querySelector('[data-choice="stay"]');
+      const goBtn = widget.querySelector('[data-choice="go"]');
+      const stayCount = stayBtn.querySelector('.vote-count');
+      const goCount = goBtn.querySelector('.vote-count');
+      const revealBtn = widget.querySelector('.reveal-btn');
+      const complication = widget.querySelector('.complication');
+      let stay = 0, go = 0;
+
+      stayBtn.addEventListener('click', () => { stay += 1; stayCount.textContent = stay; });
+      goBtn.addEventListener('click', () => { go += 1; goCount.textContent = go; });
+      if (revealBtn) {
+        revealBtn.addEventListener('click', () => {
+          const isOpen = complication.classList.toggle('show');
+          revealBtn.textContent = isOpen ? 'Hide the complication' : 'Reveal the complication';
+        });
+      }
+
+      controllers.push({
+        reset() {
+          stay = 0; go = 0;
+          stayCount.textContent = '0';
+          goCount.textContent = '0';
+          complication.classList.remove('show');
+          if (revealBtn) revealBtn.textContent = 'Reveal the complication';
+        }
+      });
+    });
+    return controllers;
+  }
+
+  function initPlayer(config) {
+    const overlay = document.getElementById(config.overlayId);
+    const launchBtn = document.getElementById(config.launchId);
+    const closeBtn = document.getElementById(config.closeId);
+    const prevBtn = document.getElementById(config.prevId);
+    const nextBtn = document.getElementById(config.nextId);
+    const currentLabel = document.getElementById(config.currentId);
+    const totalLabel = document.getElementById(config.totalId);
+    const dotsWrap = document.getElementById(config.dotsId);
+    const slides = Array.from(overlay.querySelectorAll('.slide'));
+    let current = 0;
+
+    totalLabel.textContent = slides.length;
+    slides.forEach((s, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    const controllers = [...initTimers(overlay), ...initVotes(overlay)];
+
+    function showSlide(i) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = Math.max(0, Math.min(i, slides.length - 1));
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      currentLabel.textContent = current + 1;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      controllers.forEach(c => c.reset());
+    }
+
+    function openPlayer() {
+      showSlide(0);
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePlayer() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      controllers.forEach(c => c.reset());
+    }
+
+    if (launchBtn) launchBtn.addEventListener('click', openPlayer);
+    closeBtn.addEventListener('click', closePlayer);
+    prevBtn.addEventListener('click', () => showSlide(current - 1));
+    nextBtn.addEventListener('click', () => showSlide(current + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('open')) return;
+      if (e.key === 'Escape') closePlayer();
+      if (e.key === 'ArrowRight') showSlide(current + 1);
+      if (e.key === 'ArrowLeft') showSlide(current - 1);
+    });
+  }
+
+  initPlayer({
+    overlayId: 'player-overlay', launchId: 'script-toggle', closeId: 'player-close',
+    prevId: 'player-prev', nextId: 'player-next', currentId: 'slide-current',
+    totalId: 'slide-total', dotsId: 'player-dots'
+  });
+
+  initPlayer({
+    overlayId: 'stayorgo-overlay', launchId: 'stayorgo-toggle', closeId: 'sog-close',
+    prevId: 'sog-prev', nextId: 'sog-next', currentId: 'sog-current',
+    totalId: 'sog-total', dotsId: 'sog-dots'
+  });
+
+  // ---- guide / fact-sheet toggles ----
+  function initExpandToggle(btnId, panelId) {
+    const btn = document.getElementById(btnId);
+    const panel = document.getElementById(panelId);
+    if (!btn || !panel) return;
+    btn.addEventListener('click', () => {
+      const isOpen = panel.classList.toggle('open');
+      if (isOpen) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+  initExpandToggle('guide-toggle', 'guide-panel');
+  initExpandToggle('facts-toggle', 'facts-panel');
+
+  // ---- translations ----
+  const translations = {
+    es: {
+      'nav.mission':'Misión','nav.activity':'La actividad','nav.game':'El juego','nav.events':'Eventos','nav.team':'Equipo','nav.involve':'Participar',
+      'hero.eyebrow':'Una iniciativa creada por estudiantes',
+      'hero.title':'¿Qué llevarías si tuvieras diez minutos para dejarlo todo atrás?',
+      'hero.lede':'Somos un grupo de estudiantes que convierte una actividad de clase en algo que cualquier escuela, biblioteca o sala de estar puede realizar — para que más personas entiendan lo que realmente significa convertirse en refugiado.',
+      'hero.cta1':'Ver la actividad','hero.cta2':'Participar',
+      'mission.eyebrow':'Por qué existe esto',
+      'mission.title':'La mayoría sabe que existen los refugiados. Pocos han tenido que imaginar empacar una sola mochila para el resto de su vida.',
+      'mission.p1':'Este proyecto comenzó como una actividad de clase en la Escuela Secundaria Kealing en 2023, donde los estudiantes tenían minutos para decidir qué llevaría una familia si dejara su hogar y no fuera a volver nunca. Eso significaba decidir qué se quedaba atrás. Esta actividad práctica requería que los alumnos de sexto grado trabajaran juntos para tomar decisiones rápidas y entender un poco el proceso que viven los refugiados. Creemos que este tema merece un público más amplio.',
+      'mission.p2':'Estamos reconstruyendo este proyecto como algo que no está limitado a un solo salón de clases: un kit de herramientas que cualquier maestro, bibliotecario o grupo comunitario puede tomar y usar por su cuenta, junto con eventos públicos que ponen esta conciencia frente a una comunidad que no siempre tiene la oportunidad de detenerse en esto.',
+      'mission.credit':'Escenarios originales desarrollados en la Escuela Secundaria Kealing, con materiales aportados por la Sra. Dita.',
+      'activity.eyebrow':'El kit de herramientas','activity.title':'Esto es lo que va en la mochila',
+      'activity.sub':'Estamos construyendo esto como un kit listo para facilitadores, con parte del material tomado de los recursos del ACNUR, para que la actividad tenga el mismo peso dondequiera que se realice.',
+      'item1.title':'Qué llevo en mi mochila','item1.desc':'Los participantes tienen minutos para elegir qué cabe en una sola mochila antes de tener que partir. Lo que conservan, y lo que no pueden, es toda la lección.','item1.btn':'Iniciar actividad',
+      'item2.title':'Quedarse o partir','item2.desc':'Un conjunto de tarjetas de escenarios donde los participantes sopesan decisiones reales que enfrentan las familias desplazadas — sin una respuesta clara para ninguna.','item2.btn':'Iniciar actividad',
+      'item3.title':'Guía del facilitador','item3.desc':'Todo lo que un maestro o líder de grupo necesita para dirigir la actividad sin preparación previa — tiempos, preguntas de discusión y preguntas para el cierre.','item3.btn':'Leer guía',
+      'item4.title':'Hoja de datos y fuentes','item4.desc':'Contexto en lenguaje sencillo sobre quiénes son y no son los refugiados, tomado del ACNUR y otras fuentes primarias — creado para corregir mitos comunes.','item4.btn':'Leer hoja de datos',
+      'guide.kicker':'Ítem 03 — guía del facilitador','guide.title':'Cómo dirigir la sesión completa',
+      'guide.h1':'Agenda sugerida (60–75 min)','guide.agenda1':'Introducción y contexto — 5 min','guide.agenda2':'Qué llevo en mi mochila — 25–35 min, incluyendo el cierre','guide.agenda3':'Descanso corto — 5 min','guide.agenda4':'Quedarse o partir — 25–35 min, incluyendo el cierre','guide.agenda5':'Hoja de datos y cierre — 10 min',
+      'guide.h2':'Lista de preparación del salón','guide.setup1':'Un cronómetro o cuenta regresiva visible (incluido en el Ítem 01)','guide.setup2':'Dos zonas claras del salón, marcadas QUEDARSE y PARTIR','guide.setup3':'Tarjetas si se realiza la versión física de Qué llevo en mi mochila','guide.setup4':'Un proyector o pantalla compartida, si se realizan las actividades digitales en grupo',
+      'guide.h3':'Principios de facilitación','guide.p1':'Mantén el tono serio. Estas actividades funcionan porque la presión es real, no actuada.','guide.p2':'No apresures el cierre. El silencio después de una pregunta difícil está haciendo su trabajo — déjalo estar.','guide.p3':'Ofrece una salida discreta. Algunos participantes pueden tener una conexión personal con el desplazamiento; permíteles observar en lugar de participar, sin señalarlos.','guide.p4':'Cierra cada sesión con la hoja de datos, para que el peso emocional de la actividad se apoye en información real, no solo en un sentimiento.',
+      'guide.p5':'Revisa El viaje antes de usarlo con un grupo. Algunos caminos incluyen la muerte de un familiar durante el trayecto — una parte real y común del desplazamiento, pero conviene saberlo de antemano para decidir cómo presentarlo.',
+      'guide.credit':'Escenarios originales desarrollados en la Escuela Secundaria Kealing, con materiales aportados por la Sra. Dita.',
+      'facts.kicker':'Ítem 04 — hoja de datos','facts.title':'Mitos y datos','facts.myth':'MITO','facts.fact':'DATO',
+      'facts.m1':'La mayoría de los refugiados se reasienta en países occidentales ricos.','facts.f1':'La gran mayoría es acogida por países vecinos de ingresos bajos y medios, no por naciones ricas y lejanas.',
+      'facts.m2':'Los refugiados eligen partir por oportunidad económica, como otros migrantes.','facts.f2':'Los refugiados huyen de la persecución, el conflicto o la violencia, y están protegidos por el derecho internacional en una categoría distinta a la migración económica.',
+      'facts.m3':'Solicitar asilo es un proceso rápido o automático.','facts.f3':'Los procesos de asilo y reasentamiento suelen tardar años, con una verificación rigurosa en cada etapa.',
+      'facts.m4':'Una vez que alguien es refugiado, ese estatus es permanente.','facts.f4':'La mayoría de los refugiados espera regresar a casa, y muchos lo hacen cuando las condiciones lo permiten — aunque el desplazamiento suele durar mucho más de lo que cualquiera esperaría al principio.',
+      'facts.realH':'Lo que la gente realmente lleva consigo','facts.realIntro':'En crisis recientes, los mismos objetos aparecen una y otra vez — junto con lo que sea que una familia no pueda dejar atrás.',
+      'facts.real1':'<strong>Ucrania:</strong> dinero, pasaportes, documentos de identidad, comida','facts.real2':'<strong>Sudán del Sur:</strong> dinero, pasaportes, documentos de identidad, comida','facts.real3':'<strong>Afganistán:</strong> dinero, pasaportes, documentos de identidad, comida, un Corán','facts.real4':'<strong>RDC:</strong> dinero, pasaportes, documentos de identidad, comida',
+      'facts.sources_h':'Fuentes para más información',
+      'events.eyebrow':'Hacia dónde va esto','events.title':'Una serie de eventos, desde lo sencillo hasta lo ambicioso','events.sub':'Nada de lo siguiente está confirmado todavía — esta es la hoja de ruta en la que estamos trabajando.',
+      'tier1.h':'Comunidad — el plan a corto plazo','tier1.li1':'Proyecciones de películas junto con recaudaciones de fondos para una organización de refugiados o asilados','tier1.li2':'Paneles de discusión abiertos a toda la comunidad','tier1.li3':'Marcapáginas gratuitos con recomendaciones de libros, películas y datos, distribuidos en bibliotecas y librerías',
+      'tier2.h':'Campus','tier2.li1':'Llevar la actividad estilo Kealing a otras escuelas secundarias del distrito AISD',
+      'tier3.h':'De gira','tier3.li1':'Un evento en CANOA, en Nueva Orleans',
+      'game.eyebrow':'Juégalo tú mismo','game.title':'El viaje','game.sub':'Un breve juego de decisiones para un solo jugador. No hay una jugada ganadora — solo costos distintos.','game.restart':'Volver a empezar',
+      'team.eyebrow':'Quién está construyendo esto','team.title':'Equipo fundador','team.role':'Miembro fundador','team.cofounder':'Cofundador',
+      'involve.eyebrow':'Participar','involve.title':'Tres formas de sumarte',
+      'involve.c1h':'Llévalo a tu escuela','involve.c1p':'¿Quieres realizar la actividad con tu clase o club?',
+      'involve.c2h':'Ayuda en un evento','involve.c2p':'Las proyecciones y paneles necesitan manos antes y durante.',
+      'involve.c3h':'Mantente al tanto','involve.c3p':'Entérate cuando el kit y los primeros eventos estén listos.',
+      'involve.contact':'contacto: [agregar correo]','involve.signup':'[agregar enlace de registro]',
+      'footer.l1':'El Proyecto de Defensa de Refugiados — título de trabajo','footer.l2':'Creado por estudiantes · Austin, TX',
+      'hud.health':'Salud','hud.money':'Dinero','hud.time':'Tiempo',
+      'game.startEyebrow':'Un viaje interactivo','game.startTitle':'EL VIAJE','game.startTagline':'Cada decisión cuesta algo. Algunas cuestan más que otras. Buena suerte.','game.startBtn':'Comenzar el viaje',
+      'game.newEnding':'🏅 ¡Nuevo final descubierto!','game.allEndings':'Has encontrado todos los finales del juego. Eso requiere atención de verdad — bien jugado.',
+      'game.qtPrompt':'Muévete rápido y en silencio.','game.qtButton':'Toca para avanzar','game.qtSuccess':'Pasaste sin hacer ruido.','game.qtFail':'No fuiste lo bastante silencioso.',
+      'game.luckyBad':'Mala suerte — te costó más.','game.luckyGood':'Suerte — te libraste.','game.endingsFoundLabel':'Finales encontrados','game.streak':'🔥 ¡Racha de suerte: {n}!',
+      game: {
+        endLabel: 'Fin',
+        prologue: { kicker:'Prólogo', title:'Antes del golpe en la puerta', text:"Llevas semanas escuchando los rumores — que los combates se acercaban, que otros en tu calle ya estaban haciendo planes. Esta noche, no estás listo. Nadie lo está nunca realmente.", choices:[{label:'Ya no hay más tiempo para prepararse. Aquí empieza.', next:'start'}] },
+        start: { kicker:'El juego — Comienza', title:'Las 4 de la madrugada', text:"Alguien golpea la puerta. Los soldados llegaron a las afueras del pueblo hace una hora. Tienes minutos para decidir por dónde se va tu familia.", choices:[{label:'Toma el camino de montaña — más difícil, pero evita el puesto de control', next:'mountain'},{label:'Toma el camino del puesto de control — más rápido, pero revisan todos los papeles', next:'checkpoint'},{label:'Ve directo hacia el cruce del río, sin pasar por el sendero', next:'river'}] },
+        mountain: { kicker:'Dos horas después', title:'El peso de la mochila', text:"El sendero es más empinado de lo que te dijeron. Tu hijo menor ya no puede cargar su propia mochila, y tú no puedes cargar dos.", choices:[{label:'Deja la mochila más pesada en el camino', next:'river'},{label:'Reparte la carga y baja el ritmo', next:'exhausted'},{label:'Sigue sin detenerte, directo hacia la cresta', next:'ridge'}] },
+        checkpoint: { kicker:'En el puesto de control', title:'La mano del guardia', text:"El guardia revisa tus papeles más despacio de lo necesario. Menciona, casi de pasada, que las cosas van más rápido para quienes pueden ayudarlo.", choices:[{label:'Responde con calma y espera', next:'detained'},{label:'Ofrece el dinero que llevas', next:'shortMoney'},{label:'Habla rápido y avanza antes de que mire con más cuidado', next:'secondaryRoad'}] },
+        river: { kicker:'Tres horas después', title:'El río', text:"El camino de montaña baja hacia un cruce de río poco profundo. La corriente es más fuerte de lo que parece, y alguien tendrá que cruzar las mochilas primero.", choices:[{label:'Cruza las mochilas primero y vuelve por la familia', next:'ridge'},{label:'Crucen todos juntos, más lento pero unidos', next:'ridge'},{label:'Sigue toda la noche sin descansar', next:'campArrival'}] },
+        exhausted: { kicker:'Al caer la noche', title:'Sin luz', text:"Cargar todo te ha hecho ir muy lento, y el sendero de montaña no tiene luz después del anochecer. Tendrás que detenerte, o seguir a ciegas.", choices:[{label:'Acampa en el sendero hasta el amanecer', next:'ridge'},{label:'Sigue con la luz del teléfono y espera lo mejor', next:'accident'},{label:'Retrocede para buscar un desvío más seguro, aunque cueste la noche', next:'ridge'}] },
+        detained: { kicker:'Una hora después', title:'Preguntas en un cuarto trasero', text:"Responder con calma te dio tiempo, pero un segundo guardia te aparta para más preguntas. Tu familia espera afuera, mirando por una ventana.", choices:[{label:'Responde cada pregunta exactamente como la hacen', next:'secondaryRoad'},{label:'Pide, con respeto, que también llamen a tu familia', next:'secondaryRoad'},{label:'Niégate a responder más y exige que te dejen ir', next:'campArrival'}] },
+        shortMoney: { kicker:'Más adelante', title:'Bolsillos vacíos', text:"El dinero te llevó por el primer puesto de control, pero hay un segundo más adelante, y ya no tienes nada que ofrecer.", choices:[{label:'Explica con honestidad que no te queda nada', next:'secondaryRoad'},{label:'Cambia una de tus pertenencias en su lugar', next:'secondaryRoad'},{label:'Ofrécete a trabajar para pagar la deuda en el puesto', next:'secondaryRoad'}] },
+        ridge: { kicker:'A la mañana siguiente', title:'La cresta', text:"Al amanecer has subido lo suficiente para ver el cruce fronterizo mucho más abajo — un grupo de luces y tejados, más cerca de lo que parecía ayer, pero todavía a un día entero de camino.", choices:[{label:'Tomar el atajo empinado — más rápido, pero con terreno más riesgoso', next:'campArrival'},{label:'Tomar el sendero largo en zigzag — más lento, pero más seguro', next:'campArrival'},{label:'Pedir ayuda a otros viajeros en el sendero', next:'campArrival'}] },
+        secondaryRoad: { kicker:'Más adelante en el camino', title:'El segundo puesto de control', text:"Aparece un segundo puesto de control donde el mapa decía que no habría ninguno. Este es más pequeño, con apariencia menos oficial, y de alguna manera eso hace más difícil saber qué esperar.", choices:[{label:'Mostrar todos los documentos que tienes y responder todo lo que pregunten', next:'campArrival'},{label:'Tomar el camino rural para rodearlo, esperando que nadie esté mirando', next:'campArrival'},{label:'Sobornar también a este guardia, si te queda algo', next:'campArrival'}] },
+        campArrival: { kicker:'Once días después', title:'El campamento', text:"Has llegado a un campamento en la frontera. Un trabajador social se sienta frente a ti con tres carpetas y ninguna buena opción.", choices:[{label:'Esperar el proceso legal oficial — años, pero seguro', next:'monthsWaiting'},{label:'Intentar un cruce no oficial esta noche', next:'crossingNight'},{label:'Aceptar un reasentamiento, solo, lejos de todos los que conoces', next:'newCity'}] },
+        monthsWaiting: { kicker:'Ocho meses después', title:'Todavía en la fila', text:"El papeleo avanza más lento de lo que prometieron. Tu número de caso es real, pero también lo es el calendario — y nadie puede decirte en qué año termina esto.", choices:[{label:'Seguir esperando; el camino legal sigue siendo el más seguro', next:'endingWaitLong'},{label:'La frustración gana; buscar una salida fuera del sistema', next:'endingRiskLate'},{label:'Buscar ayuda de una organización local', next:'endingWaitLong'}] },
+        crossingNight: { kicker:'Esa noche', title:'El cruce', text:"Vas sin luces, sin un mapa en el que confíes, siguiendo a un guía que no da su nombre real. Cada sonido detrás de ti podría no ser nada, o podría serlo todo.", choices:[{label:'Sigue moviéndote — detenerte arriesga perderlos a todos', next:'endingRisk'},{label:'Regresa por quien se quedó atrás en la oscuridad', next:'riverLoss'},{label:'Paga al guía más por una ruta más segura', next:'endingRisk'}] },
+        accident: { kicker:'Cerca de la medianoche', title:'La oscuridad no espera', text:"Alguien pierde el paso donde el sendero se curva cerca del precipicio. Sucede rápido, y para cuando el resto de ustedes llega hasta ella, ya no hay nada que hacer más que despedirse. No hay tiempo para llorar como se debería — solo el necesario para seguir caminando, porque detenerse no es más seguro para los demás.", choices:[{label:'Sigue caminando. No hay una versión de esto en la que puedas detenerte.', next:'ridge'}] },
+        riverLoss: { kicker:'En el agua', title:'Lo que se lleva la corriente', text:"Regresas. El agua es más rápida y fría de lo que parecía desde la orilla, y para cuando llegas hasta él, ya es demasiado tarde. No hay una manera limpia de llevar esto — solo seguir adelante, y recordar que no todos los que empiezan un cruce llegan al otro lado.", choices:[{label:'Sigue adelante.', next:'endingRisk'}] },
+        newCity: { kicker:'Tres semanas después', title:'Una ciudad que aún no es tuya', text:"Has llegado a un lugar seguro, con una trabajadora social, un apartamento temporal, y nadie que te conociera antes de todo esto.", choices:[{label:'Buscar apoyo — un centro comunitario, una clase de idioma, lo que sea', next:'endingFarConnected'},{label:'Mantenerte reservado y concentrarte solo en el trabajo por ahora', next:'endingFarIsolated'},{label:'Unirte a una actividad grupal a la semana — poco, pero algo', next:'endingFarConnected'}] },
+        endingWaitLong: { kicker:'Algún tiempo después', title:'Años de espera', text:"Este es el final más común. No un solo peligro dramático, sino una larga fila de salas de espera comunes, una tras otra, por más tiempo del que nadie te dijo al principio.", choices:[{label:'Sigue adelante.', next:'epilogueWaitLong'}] },
+        endingRiskLate: { kicker:'Algún tiempo después', title:'Fuera del registro', text:"Dejaste atrás el proceso legal por una ruta sin papeles y sin garantías. Algunos que toman este camino llegan más rápido. Otros no llegan. No sabes cuál serás tú hasta que ya te has ido.", choices:[{label:'Sigue adelante.', next:'epilogueRiskLate'}] },
+        endingRisk: { kicker:'Justo después', title:'El viaje continúa', text:"Lograste cruzar. Nadie puede decirte qué sigue — para quienes toman esta ruta, la historia no termina en la frontera.", choices:[{label:'Sigue adelante.', next:'epilogueRisk'}] },
+        endingFarConnected: { kicker:'Algún tiempo después', title:'Una comunidad prestada', text:"No es tu hogar, y quizás nunca lo sea del todo. Pero seis meses después, conoces los nombres de tus vecinos, y alguien nota cuando faltas.", choices:[{label:'Sigue adelante.', next:'epilogueFarConnected'}] },
+        endingFarIsolated: { kicker:'Algún tiempo después', title:'A salvo, y solo', text:"Estás a salvo, y tus hijos tienen un futuro aquí. También sigues siendo, un año después, la única persona en cualquier habitación que recuerda quién eras antes de todo esto.", choices:[{label:'Sigue adelante.', next:'epilogueFarIsolated'}] },
+        epilogueWaitLong: { kicker:'Final', title:'Lo que costó la espera', text:"El día en que por fin aprueban tu caso, casi no lo sientes. Has pasado tanto tiempo ensayando este momento que el real llega casi en silencio — alivio, sí, pero también el extraño duelo por los años que no puedes recuperar.", ending:true },
+        epilogueRiskLate: { kicker:'Final', title:'Sin garantías', text:"Lograste pasar, pero la ruta que tomaste no aparece en ningún formulario que tengas que llenar de nuevo. Nadie pregunta cómo llegaste aquí. Has notado que tú tampoco lo ofreces.", ending:true },
+        epilogueRisk: { kicker:'Final', title:'Cruzaste, y sigues en movimiento', text:"Cruzar no fue el final que pensabas que sería. Fue solo la primera de muchas fronteras — legales, financieras, emocionales — que todavía se interponían entre tú y algo que pudieras llamar estabilidad.", ending:true },
+        epilogueFarConnected: { kicker:'Final', title:'Un hogar, con el tiempo', text:"Tardó más de lo que nadie prometió, pero en algún punto entre las clases de idioma y las cenas comunitarias, esto dejó de sentirse como el país de otra persona.", ending:true },
+        epilogueFarIsolated: { kicker:'Final', title:'Los que recuerdan', text:"Construiste una buena vida aquí, sobre el papel. Pero algunas noches todavía te encuentras tratando de describir, a personas que no estuvieron ahí, una versión de tu propia infancia que ya no existe en ningún otro lugar más que en tu memoria.", ending:true },
+        gameOverHealth: { kicker:'Final', title:'El cuerpo cede primero', text:"El agotamiento no es dramático. Es solo un cuerpo que, en silencio, deja de poder seguir, un día como cualquier otro, en un camino que todavía tenía más por recorrer.", ending:true },
+        gameOverMoney: { kicker:'Final', title:'Nada más que ofrecer', text:"Llega un punto en el que has vendido, cambiado o gastado todo lo que trajiste de casa, y el camino todavía no termina. El dinero no se acaba con estruendo. Simplemente ya no está, justo cuando más lo necesitas.", ending:true },
+        gameOverTime: { kicker:'Final', title:'Demasiado tiempo ha pasado', text:"No hay un momento dramático cuando se acaba el tiempo. Solo una puerta que estaba abierta, y que, un día cualquiera, dejó de estarlo.", ending:true }
+      }
+    },
+    de: {
+      'nav.mission':'Mission','nav.activity':'Die Aktivität','nav.game':'Das Spiel','nav.events':'Veranstaltungen','nav.team':'Team','nav.involve':'Mitmachen',
+      'hero.eyebrow':'Eine von Schülern gegründete Initiative',
+      'hero.title':'Was würdest du mitnehmen, wenn du zehn Minuten Zeit hättest, alles zurückzulassen?',
+      'hero.lede':'Wir sind eine Gruppe von Schülern, die aus einer einzigen Klassenaktivität etwas macht, das jede Schule, Bibliothek oder Wohnzimmer durchführen kann — damit mehr Menschen verstehen, was es wirklich bedeutet, ein Flüchtling zu werden.',
+      'hero.cta1':'Die Aktivität ansehen','hero.cta2':'Mitmachen',
+      'mission.eyebrow':'Warum es das gibt',
+      'mission.title':'Die meisten wissen, dass es Flüchtlinge gibt. Nur wenige mussten sich vorstellen, für den Rest ihres Lebens nur eine Tasche zu packen.',
+      'mission.p1':'Dieses Projekt begann 2023 als Klassenaktivität an der Kealing Middle School, bei der Schüler in Minuten entscheiden mussten, was eine Familie mitnehmen würde, wenn sie ihr Zuhause verließe und nie zurückkäme. Das bedeutete auch zu entscheiden, was zurückbleibt. Diese praktische Übung verlangte von Sechstklässlern, gemeinsam schnelle Entscheidungen zu treffen und ein Stück weit den Prozess von Geflüchteten zu verstehen. Wir glauben, dieses Thema verdient ein breiteres Publikum.',
+      'mission.p2':'Wir bauen dieses Projekt zu etwas um, das nicht an ein einziges Klassenzimmer gebunden ist: ein Toolkit, das jede Lehrkraft, Bibliothekarin oder Gemeinschaftsgruppe selbst nutzen kann, zusammen mit öffentlichen Veranstaltungen, die dieses Bewusstsein vor eine Gemeinschaft bringen, die sonst nicht immer die Gelegenheit dazu hat.',
+      'mission.credit':'Ursprüngliche Szenarien entwickelt an der Kealing Middle School, mit Material von Frau Dita.',
+      'activity.eyebrow':'Das Toolkit','activity.title':'Das kommt in die Tasche',
+      'activity.sub':'Wir bauen dies als ein für Facilitator einsatzbereites Kit, teilweise aus Materialien des UNHCR, damit die Übung überall das gleiche Gewicht trägt.',
+      'item1.title':'Was ist in meiner Tasche','item1.desc':'Die Teilnehmenden haben Minuten Zeit zu entscheiden, was in eine einzige Tasche passt, bevor sie gehen müssen. Was sie behalten und was nicht, ist die ganze Lektion.','item1.btn':'Aktivität starten',
+      'item2.title':'Bleiben oder gehen','item2.desc':'Ein Satz von Szenario-Karten, bei denen Teilnehmende reale Entscheidungen abwägen, vor denen vertriebene Familien stehen — ohne eine klare Antwort.','item2.btn':'Aktivität starten',
+      'item3.title':'Leitfaden für Facilitator','item3.desc':'Alles, was eine Lehrkraft oder Gruppenleitung braucht, um die Aktivität ohne Vorbereitung durchzuführen — Zeitplan, Diskussionsfragen und Abschlussfragen.','item3.btn':'Leitfaden lesen',
+      'item4.title':'Faktenblatt &amp; Quellen','item4.desc':'Verständliche Hintergrundinformationen darüber, wer Flüchtlinge sind und wer nicht, aus UNHCR- und anderen Primärquellen — um gängige Mythen richtigzustellen.','item4.btn':'Faktenblatt lesen',
+      'guide.kicker':'Punkt 03 — Leitfaden für Facilitator','guide.title':'Die gesamte Sitzung durchführen',
+      'guide.h1':'Vorgeschlagener Ablauf (60–75 Min.)','guide.agenda1':'Einführung &amp; Rahmen — 5 Min.','guide.agenda2':'Was ist in meiner Tasche — 25–35 Min., inkl. Nachbesprechung','guide.agenda3':'Kurze Pause — 5 Min.','guide.agenda4':'Bleiben oder gehen — 25–35 Min., inkl. Nachbesprechung','guide.agenda5':'Faktenblatt &amp; Abschluss — 10 Min.',
+      'guide.h2':'Checkliste für den Raum','guide.setup1':'Eine sichtbare Uhr oder ein Countdown (in Punkt 01 enthalten)','guide.setup2':'Zwei klar markierte Zonen im Raum: BLEIBEN und GEHEN','guide.setup3':'Karteikarten, falls die physische Version von Was ist in meiner Tasche durchgeführt wird','guide.setup4':'Ein Projektor oder gemeinsamer Bildschirm, falls die digitalen Aktivitäten als Klasse durchgeführt werden',
+      'guide.h3':'Grundsätze der Moderation','guide.p1':'Halte den Ton ernst. Diese Aktivitäten funktionieren, weil der Druck echt ist, nicht gespielt.','guide.p2':'Überstürze die Nachbesprechung nicht. Die Stille nach einer schwierigen Frage leistet Arbeit — lass sie zu.','guide.p3':'Biete eine stille Möglichkeit zum Aussteigen. Manche Teilnehmende haben vielleicht einen persönlichen Bezug zu Vertreibung; lass sie stattdessen beobachten, ohne sie hervorzuheben.','guide.p4':'Schließe jede Sitzung mit dem Faktenblatt ab, damit das emotionale Gewicht der Aktivität auf echten Informationen landet, nicht nur auf einem Gefühl.',
+      'guide.p5':'Sieh dir Die Reise vorab an, bevor du sie mit einer Gruppe spielst. Manche Pfade beinhalten den Tod eines Familienmitglieds unterwegs — ein realer und häufiger Teil von Vertreibung, aber gut zu wissen, bevor man entscheidet, wie man es einführt.',
+      'guide.credit':'Ursprüngliche Szenarien entwickelt an der Kealing Middle School, mit Material von Frau Dita.',
+      'facts.kicker':'Punkt 04 — Faktenblatt','facts.title':'Mythen und Fakten','facts.myth':'MYTHOS','facts.fact':'FAKT',
+      'facts.m1':'Die meisten Flüchtlinge werden in wohlhabenden westlichen Ländern angesiedelt.','facts.f1':'Die große Mehrheit wird von benachbarten Ländern mit niedrigem und mittlerem Einkommen aufgenommen, nicht von wohlhabenden, weit entfernten Nationen.',
+      'facts.m2':'Flüchtlinge verlassen ihr Land wegen wirtschaftlicher Chancen, wie andere Migranten auch.','facts.f2':'Flüchtlinge fliehen vor Verfolgung, Konflikt oder Gewalt und sind völkerrechtlich in einer eigenen Kategorie geschützt, getrennt von wirtschaftlicher Migration.',
+      'facts.m3':'Asyl zu beantragen ist ein schneller oder automatischer Prozess.','facts.f3':'Asyl- und Umsiedlungsverfahren dauern oft Jahre, mit strenger Prüfung in jeder Phase.',
+      'facts.m4':'Sobald jemand Flüchtling ist, bleibt dieser Status dauerhaft.','facts.f4':'Die meisten Flüchtlinge hoffen, nach Hause zurückzukehren, und viele tun es, wenn die Umstände es zulassen — auch wenn Vertreibung oft viel länger dauert, als anfangs jemand erwartet.',
+      'facts.realH':'Was Menschen wirklich mitnehmen','facts.realIntro':'In aktuellen Krisen tauchen immer wieder dieselben Dinge auf — zusammen mit allem, was eine Familie einfach nicht zurücklassen kann.',
+      'facts.real1':'<strong>Ukraine:</strong> Geld, Pässe, Ausweispapiere, Essen','facts.real2':'<strong>Südsudan:</strong> Geld, Pässe, Ausweispapiere, Essen','facts.real3':'<strong>Afghanistan:</strong> Geld, Pässe, Ausweispapiere, Essen, einen Koran','facts.real4':'<strong>DR Kongo:</strong> Geld, Pässe, Ausweispapiere, Essen',
+      'facts.sources_h':'Quellen zum Weiterlesen',
+      'events.eyebrow':'Wie es weitergeht','events.title':'Eine Reihe von Veranstaltungen, von einfach bis ambitioniert','events.sub':'Noch ist nichts davon gebucht — das ist der Fahrplan, an dem wir arbeiten.',
+      'tier1.h':'Gemeinschaft — der kurzfristige Plan','tier1.li1':'Filmvorführungen kombiniert mit Spendenaktionen für eine Flüchtlings- oder Asylorganisation','tier1.li2':'Diskussionsrunden, offen für die gesamte Gemeinschaft','tier1.li3':'Kostenlose Lesezeichen mit Buch-, Film- und Statistikempfehlungen, verteilt in Bibliotheken und Buchhandlungen',
+      'tier2.h':'Campus','tier2.li1':'Die Kealing-artige Aktivität an weitere Mittelschulen des AISD bringen',
+      'tier3.h':'Auf Tour','tier3.li1':'Ein Pop-up bei CANOA in New Orleans',
+      'game.eyebrow':'Selbst spielen','game.title':'Die Reise','game.sub':'Ein kurzes Entscheidungsspiel für eine Person. Es gibt keinen Gewinnzug — nur unterschiedliche Kosten.','game.restart':'Neu starten',
+      'team.eyebrow':'Wer das hier aufbaut','team.title':'Gründungsteam','team.role':'Gründungsmitglied','team.cofounder':'Mitgründer',
+      'involve.eyebrow':'Mitmachen','involve.title':'Drei Wege mitzumachen',
+      'involve.c1h':'Bring es an deine Schule','involve.c1p':'Möchtest du die Aktivität mit deiner Klasse oder deinem Club durchführen?',
+      'involve.c2h':'Bei einer Veranstaltung helfen','involve.c2p':'Vorführungen und Diskussionsrunden brauchen Hände, vorher und währenddessen.',
+      'involve.c3h':'Auf dem Laufenden bleiben','involve.c3p':'Erfahre, wenn das Toolkit und die ersten Veranstaltungen live gehen.',
+      'involve.contact':'Kontakt: [E-Mail hinzufügen]','involve.signup':'[Anmeldelink hinzufügen]',
+      'footer.l1':'Das Refugee Advocacy Project — Arbeitstitel','footer.l2':'Von Schülern erstellt · Austin, TX',
+      'hud.health':'Gesundheit','hud.money':'Geld','hud.time':'Zeit',
+      'game.startEyebrow':'Eine interaktive Reise','game.startTitle':'DIE REISE','game.startTagline':'Jede Entscheidung kostet etwas. Manche kosten mehr als andere. Viel Glück.','game.startBtn':'Die Reise beginnen',
+      'game.newEnding':'🏅 Neues Ende entdeckt!','game.allEndings':'Du hast jedes Ende im Spiel gefunden. Das erfordert wirklich Aufmerksamkeit — gut gespielt.',
+      'game.qtPrompt':'Beweg dich schnell und leise.','game.qtButton':'Tippen zum Vorwärtsgehen','game.qtSuccess':'Du bist lautlos vorbeigekommen.','game.qtFail':'Du warst nicht ganz leise genug.',
+      'game.luckyBad':'Pech — das hat dich mehr gekostet.','game.luckyGood':'Glück — du bist davongekommen.','game.endingsFoundLabel':'Gefundene Enden','game.streak':'🔥 Glückssträhne: {n}!',
+      game: {
+        endLabel: 'Ende',
+        prologue: { kicker:'Prolog', title:'Vor dem Klopfen', text:"Seit Wochen hörst du die Gerüchte — dass die Kämpfe näher rücken, dass andere in deiner Straße schon Pläne machen. Heute Nacht bist du nicht bereit. Das ist eigentlich nie jemand wirklich.", choices:[{label:'Es bleibt keine Zeit mehr zur Vorbereitung. Hier fängt es an.', next:'start'}] },
+        start: { kicker:'Das Spiel — Beginn', title:'4 Uhr morgens', text:"Jemand klopft an die Tür. Soldaten haben vor einer Stunde den Stadtrand erreicht. Du hast nur Minuten, um zu entscheiden, welchen Weg deine Familie nimmt.", choices:[{label:'Nimm den Bergpfad — schwieriger, aber ohne Kontrollpunkt', next:'mountain'},{label:'Nimm die Straße zum Kontrollpunkt — schneller, aber jedes Papier wird geprüft', next:'checkpoint'},{label:'Geh direkt zur Flussüberquerung, ohne den Pfad', next:'river'}] },
+        mountain: { kicker:'Zwei Stunden später', title:'Das Gewicht der Tasche', text:"Der Pfad ist steiler, als irgendjemand gesagt hat. Dein Jüngstes kann seinen eigenen Rucksack nicht mehr tragen, und du kannst nicht zwei tragen.", choices:[{label:'Lass die schwerste Tasche auf dem Weg zurück', next:'river'},{label:'Teile die Last auf und geh langsamer', next:'exhausted'},{label:'Geh ohne Halt weiter, direkt zum Grat', next:'ridge'}] },
+        checkpoint: { kicker:'Am Kontrollpunkt', title:'Die Hand des Wächters', text:"Der Wächter blättert langsamer als nötig durch deine Papiere. Er erwähnt beiläufig, dass es für Leute, die ihm helfen können, schneller geht.", choices:[{label:'Bleib ruhig und warte ab', next:'detained'},{label:'Biete das Geld an, das du bei dir hast', next:'shortMoney'},{label:'Rede schnell und komm durch, bevor er genauer hinsieht', next:'secondaryRoad'}] },
+        river: { kicker:'Drei Stunden später', title:'Der Fluss', text:"Der Bergpfad mündet in eine flache Flussüberquerung. Die Strömung ist stärker, als sie aussieht, und jemand muss die Taschen zuerst hinübertragen.", choices:[{label:'Trage zuerst die Taschen hinüber, dann hol die Familie', next:'ridge'},{label:'Alle überqueren gemeinsam, langsamer, aber zusammen', next:'ridge'},{label:'Geh die ganze Nacht ohne Rast weiter', next:'campArrival'}] },
+        exhausted: { kicker:'Bei Einbruch der Nacht', title:'Kein Licht mehr', text:"Das Tragen von allem hat dich verlangsamt, und der Bergpfad ist nach Einbruch der Dunkelheit unbeleuchtet. Du musst anhalten oder blind weitergehen.", choices:[{label:'Schlage auf dem Pfad ein Lager auf, bis zum Sonnenaufgang', next:'ridge'},{label:'Geh mit Handylicht weiter und hoffe das Beste', next:'accident'},{label:'Geh zurück, um einen sichereren Umweg zu finden, auch wenn es die Nacht kostet', next:'ridge'}] },
+        detained: { kicker:'Eine Stunde später', title:'Fragen in einem Hinterzimmer', text:"Ruhig zu antworten hat dir Zeit verschafft, aber ein zweiter Wächter nimmt dich für weitere Fragen beiseite. Deine Familie wartet direkt draußen und schaut durch ein Fenster.", choices:[{label:'Beantworte jede Frage genau so, wie sie gestellt wird', next:'secondaryRoad'},{label:'Bitte respektvoll darum, dass auch deine Familie hereingerufen wird', next:'secondaryRoad'},{label:'Weigere dich, weiter zu antworten, und verlange, zu gehen', next:'campArrival'}] },
+        shortMoney: { kicker:'Weiter die Straße entlang', title:'Leere Taschen', text:"Das Geld hat dich durch den ersten Kontrollpunkt gebracht, aber ein zweiter liegt voraus, und dir bleibt nichts mehr anzubieten.", choices:[{label:'Erkläre ehrlich, dass dir nichts mehr bleibt', next:'secondaryRoad'},{label:'Tausche stattdessen eine deiner restlichen Habseligkeiten', next:'secondaryRoad'},{label:'Biete an, die Schuld am Grenzposten abzuarbeiten', next:'secondaryRoad'}] },
+        ridge: { kicker:'Am nächsten Morgen', title:'Der Grat', text:"Bei Sonnenaufgang bist du hoch genug geklettert, um den Grenzübergang weit unten zu sehen — eine Ansammlung von Lichtern und Dächern, näher als gestern, aber immer noch einen vollen Tagesmarsch entfernt.", choices:[{label:'Die steile Abkürzung nehmen — schneller, aber unsicherer Untergrund', next:'campArrival'},{label:'Den längeren Serpentinenweg nehmen — langsamer, aber sicherer', next:'campArrival'},{label:'Andere Reisende auf dem Pfad um Hilfe bitten', next:'campArrival'}] },
+        secondaryRoad: { kicker:'Weiter die Straße entlang', title:'Der zweite Kontrollpunkt', text:"Ein zweiter Kontrollpunkt taucht auf, wo laut Karte keiner sein sollte. Dieser ist kleiner, wirkt weniger offiziell, und gerade das macht es schwerer einzuschätzen, was einen erwartet.", choices:[{label:'Alle Papiere zeigen und jede Frage beantworten', next:'campArrival'},{label:'Den Feldweg darum herum nehmen, in der Hoffnung, dass niemand hinsieht', next:'campArrival'},{label:'Auch diesen Wächter bestechen, falls noch etwas übrig ist', next:'campArrival'}] },
+        campArrival: { kicker:'Elf Tage später', title:'Das Lager', text:"Du hast ein Lager an der Grenze erreicht. Eine Sachbearbeiterin sitzt dir gegenüber mit drei Mappen und keiner guten Option.", choices:[{label:'Auf das offizielle, rechtliche Verfahren warten — Jahre, aber sicher', next:'monthsWaiting'},{label:'Heute Nacht einen inoffiziellen Grenzübertritt versuchen', next:'crossingNight'},{label:'Ein Umsiedlungsangebot annehmen, allein, weit weg von allen, die du kennst', next:'newCity'}] },
+        monthsWaiting: { kicker:'Acht Monate später', title:'Immer noch in der Warteschlange', text:"Die Papierarbeit geht langsamer voran, als versprochen wurde. Deine Fallnummer ist echt, aber das ist der Kalender auch — und niemand kann dir sagen, in welchem Jahr das endet.", choices:[{label:'Weiter warten; der legale Weg ist immer noch der sicherste', next:'endingWaitLong'},{label:'Die Frustration siegt; einen Ausweg aus dem System suchen', next:'endingRiskLate'},{label:'Eine örtliche Hilfsorganisation um Unterstützung bitten', next:'endingWaitLong'}] },
+        crossingNight: { kicker:'In dieser Nacht', title:'Die Überquerung', text:"Du gehst ohne Licht, ohne eine Karte, der du traust, und folgst einem Führer, der seinen echten Namen nicht nennt. Jedes Geräusch hinter dir könnte nichts sein — oder alles.", choices:[{label:'Weiter, egal was — Stehenbleiben riskiert alle', next:'endingRisk'},{label:'Zurückgehen für den, der im Dunkeln zurückgeblieben ist', next:'riverLoss'},{label:'Dem Führer extra zahlen für eine längere, sicherere Route', next:'endingRisk'}] },
+        accident: { kicker:'Kurz vor Mitternacht', title:'Die Dunkelheit wartet nicht', text:"Jemand verschätzt sich, wo der Pfad nahe dem Abhang eine Kurve macht. Es geht schnell, und als der Rest von euch sie erreicht, bleibt nur noch, sich zu verabschieden. Es bleibt keine Zeit, richtig zu trauern — nur genug, um weiterzugehen, denn Stehenbleiben ist für die anderen nicht sicherer.", choices:[{label:'Weitergehen. Es gibt keine Version davon, in der ihr aufhören könnt.', next:'ridge'}] },
+        riverLoss: { kicker:'Im Wasser', title:'Was die Strömung nimmt', text:"Du gehst zurück. Das Wasser ist schneller und kälter, als es vom Ufer aus aussah, und als du ihn erreichst, ist es bereits zu spät. Es gibt keinen sauberen Weg, das weiterzutragen — nur weiterzugehen, und sich zu merken, dass nicht jeder, der eine Überquerung beginnt, auf der anderen Seite ankommt.", choices:[{label:'Weitergehen.', next:'endingRisk'}] },
+        newCity: { kicker:'Drei Wochen später', title:'Eine Stadt, die noch nicht deine ist', text:"Du bist an einem sicheren Ort angekommen, mit einer Sachbearbeiterin, einer vorübergehenden Wohnung, und niemandem, der dich von vorher kennt.", choices:[{label:'Geh auf andere zu — ein Gemeindezentrum, ein Sprachkurs, irgendetwas', next:'endingFarConnected'},{label:'Bleib erst einmal für dich und konzentriere dich nur auf die Arbeit', next:'endingFarIsolated'},{label:'Nimm einmal pro Woche an einer Gruppenaktivität teil — wenig, aber nicht nichts', next:'endingFarConnected'}] },
+        endingWaitLong: { kicker:'Einige Zeit später', title:'Jahre des Wartens', text:"Das ist das häufigste Ende. Keine einzelne dramatische Gefahr, sondern eine lange Reihe gewöhnlicher Wartezimmer, eines nach dem anderen, länger als am Anfang irgendjemand gesagt hat.", choices:[{label:'Weiter geht es.', next:'epilogueWaitLong'}] },
+        endingRiskLate: { kicker:'Einige Zeit später', title:'Außerhalb der Akten', text:"Du hast das legale Verfahren für einen Weg ohne Papiere und ohne Garantien hinter dir gelassen. Manche, die diesen Weg gehen, kommen schneller an. Manche kommen gar nicht an. Du weißt erst, welches du sein wirst, wenn du schon fort bist.", choices:[{label:'Weiter geht es.', next:'epilogueRiskLate'}] },
+        endingRisk: { kicker:'Kurz danach', title:'Die Reise geht weiter', text:"Du hast es über die Grenze geschafft. Niemand kann dir sagen, was als Nächstes passiert — für die Menschen, die diesen Weg nehmen, endet die Geschichte nicht an der Grenze.", choices:[{label:'Weiter geht es.', next:'epilogueRisk'}] },
+        endingFarConnected: { kicker:'Einige Zeit später', title:'Eine geliehene Gemeinschaft', text:"Es ist nicht zu Hause, und wird es vielleicht nie ganz sein. Aber sechs Monate später kennst du die Namen deiner Nachbarn, und jemand bemerkt es, wenn du nicht auftauchst.", choices:[{label:'Weiter geht es.', next:'epilogueFarConnected'}] },
+        endingFarIsolated: { kicker:'Einige Zeit später', title:'Sicher, und allein', text:"Du bist in Sicherheit, und deine Kinder haben hier eine Zukunft. Du bist auch, ein Jahr später, immer noch die einzige Person in jedem Raum, die sich daran erinnert, wer du vor all dem warst.", choices:[{label:'Weiter geht es.', next:'epilogueFarIsolated'}] },
+        epilogueWaitLong: { kicker:'Ende', title:'Was das Warten gekostet hat', text:"An dem Tag, an dem dein Fall endlich genehmigt wird, spürst du kaum etwas. Du hast diesen Moment so lange geprobt, dass der echte fast leise ankommt — Erleichterung, ja, aber auch die seltsame Trauer um Jahre, die du nicht zurückbekommst.", ending:true },
+        epilogueRiskLate: { kicker:'Ende', title:'Keine Garantien', text:"Du bist durch, aber der Weg, den du genommen hast, taucht in keinem Formular auf, das du je wieder ausfüllen musst. Niemand fragt, wie du hierhergekommen bist. Du hast bemerkt, dass du es auch nicht anbietest.", ending:true },
+        epilogueRisk: { kicker:'Ende', title:'Drüben, und immer noch unterwegs', text:"Die Grenze zu überqueren war nicht das Ende, das du dir vorgestellt hattest. Es war nur die erste von vielen Grenzen — rechtlich, finanziell, emotional — die noch zwischen dir und irgendetwas standen, das du als angekommen bezeichnen würdest.", ending:true },
+        epilogueFarConnected: { kicker:'Ende', title:'Zuhause, irgendwann', text:"Es hat länger gedauert, als irgendjemand versprochen hatte, aber irgendwo zwischen den Sprachkursen und den gemeinsamen Abendessen hat sich das hier aufgehört, wie das Land eines anderen anzufühlen.", ending:true },
+        epilogueFarIsolated: { kicker:'Ende', title:'Die, die sich erinnern', text:"Du hast dir hier auf dem Papier ein gutes Leben aufgebaut. Aber manche Nächte versuchst du immer noch, Menschen, die nicht dabei waren, eine Version deiner eigenen Kindheit zu beschreiben, die es nirgendwo mehr gibt außer in deiner Erinnerung.", ending:true },
+        gameOverHealth: { kicker:'Ende', title:'Der Körper gibt zuerst auf', text:"Erschöpfung ist nicht dramatisch. Es ist nur ein Körper, der still aufhört, weitermachen zu können, an einem Tag wie jedem anderen, auf einem Weg, der noch nicht zu Ende war.", ending:true },
+        gameOverMoney: { kicker:'Ende', title:'Nichts mehr zu geben', text:"Es gibt einen Punkt, an dem du alles verkauft, getauscht oder ausgegeben hast, was du von zu Hause mitgebracht hast, und der Weg ist immer noch nicht zu Ende. Geld geht nicht mit einem Knall aus. Es ist einfach nicht mehr da, genau dann, wenn du es am meisten brauchst.", ending:true },
+        gameOverTime: { kicker:'Ende', title:'Zu viel Zeit ist vergangen', text:"Es gibt keinen dramatischen Moment, wenn die Zeit ausgeht. Nur eine Tür, die offen war, und die, an einem gewöhnlichen Tag, es nicht mehr war.", ending:true }
+      }
+    },
+    fr: {
+      'nav.mission':'Mission','nav.activity':"L'activité",'nav.game':'Le jeu','nav.events':'Événements','nav.team':'Équipe','nav.involve':'Participer',
+      'hero.eyebrow':'Une initiative créée par des élèves',
+      'hero.title':"Qu'emporteriez-vous si vous aviez dix minutes pour tout laisser derrière vous ?",
+      'hero.lede':"Nous sommes un groupe d'élèves qui transforme une simple activité de classe en quelque chose que n'importe quelle école, bibliothèque ou salon peut organiser — pour que davantage de personnes comprennent ce que signifie réellement devenir réfugié.",
+      'hero.cta1':"Voir l'activité",'hero.cta2':'Participer',
+      'mission.eyebrow':'Pourquoi ce projet existe',
+      'mission.title':"La plupart des gens savent que les réfugiés existent. Peu ont dû imaginer ne remplir qu'un seul sac pour le reste de leur vie.",
+      'mission.p1':"Ce projet a commencé en 2023 comme une activité de classe au collège Kealing, où les élèves avaient quelques minutes pour décider ce qu'une famille emporterait si elle quittait sa maison pour ne jamais y revenir. Cela voulait dire choisir ce qui restait derrière. Cette activité pratique demandait aux élèves de sixième de travailler ensemble pour prendre des décisions rapides et comprendre un peu ce que vivent les réfugiés. Nous pensons que ce sujet mérite un public plus large.",
+      'mission.p2':"Nous reconstruisons ce projet en quelque chose qui n'est pas limité à une seule salle de classe : un kit d'outils que n'importe quel enseignant, bibliothécaire ou groupe communautaire peut utiliser lui-même, accompagné d'événements publics qui mettent cette prise de conscience devant une communauté qui n'a pas toujours l'occasion de s'y arrêter.",
+      'mission.credit':'Scénarios originaux développés au collège Kealing, avec des documents fournis par Mme Dita.',
+      'activity.eyebrow':"Le kit d'outils",'activity.title':'Voici ce qui va dans le sac',
+      'activity.sub':"Nous construisons ceci comme un kit prêt pour les animateurs, en partie tiré des ressources du HCR, afin que l'exercice garde le même poids partout où il est mené.",
+      'item1.title':"Qu'y a-t-il dans mon sac",'item1.desc':"Les participants ont quelques minutes pour choisir ce qui tient dans un seul sac avant de devoir partir. Ce qu'ils gardent, et ce qu'ils ne peuvent pas garder, est toute la leçon.",'item1.btn':"Lancer l'activité",
+      'item2.title':'Rester ou partir','item2.desc':"Une série de cartes-scénarios où les participants pèsent de vraies décisions auxquelles font face les familles déplacées — sans réponse simple pour aucune d'entre elles.",'item2.btn':"Lancer l'activité",
+      'item3.title':"Guide de l'animateur",'item3.desc':"Tout ce dont un enseignant ou un responsable de groupe a besoin pour mener l'activité sans préparation — minutage, questions de discussion et questions de clôture.",'item3.btn':'Lire le guide',
+      'item4.title':"Fiche d'information et sources",'item4.desc':"Un contexte en langage simple sur qui sont, et ne sont pas, les réfugiés, tiré du HCR et d'autres sources primaires — conçu pour corriger les idées reçues courantes.",'item4.btn':'Lire la fiche',
+      'guide.kicker':"Point 03 — guide de l'animateur",'guide.title':'Mener la séance complète',
+      'guide.h1':'Programme suggéré (60–75 min)','guide.agenda1':'Introduction et cadrage — 5 min','guide.agenda2':"Qu'y a-t-il dans mon sac — 25–35 min, débriefing inclus",'guide.agenda3':'Courte pause — 5 min','guide.agenda4':'Rester ou partir — 25–35 min, débriefing inclus','guide.agenda5':"Fiche d'information et clôture — 10 min",
+      'guide.h2':'Liste de préparation de la salle','guide.setup1':'Un minuteur ou compte à rebours visible (inclus dans le point 01)','guide.setup2':'Deux zones bien délimitées de la salle, marquées RESTER et PARTIR','guide.setup3':"Des fiches cartonnées si vous menez la version physique de Qu'y a-t-il dans mon sac",'guide.setup4':'Un projecteur ou un écran partagé, si les activités numériques sont menées en classe entière',
+      'guide.h3':"Principes d'animation",'guide.p1':"Gardez un ton sérieux. Ces activités fonctionnent parce que la pression est réelle, pas jouée.",'guide.p2':"Ne précipitez pas le débriefing. Le silence après une question difficile fait son travail — laissez-le s'installer.",'guide.p3':"Offrez une sortie discrète. Certains participants peuvent avoir un lien personnel avec le déplacement ; laissez-les observer plutôt que participer, sans les désigner.",'guide.p4':"Terminez chaque séance par la fiche d'information, afin que le poids émotionnel de l'activité repose sur de vraies informations, pas seulement sur un ressenti.",
+      'guide.p5':"Prévisualisez Le voyage avant de l'utiliser avec un groupe. Certains chemins incluent la mort d'un membre de la famille pendant le trajet — une réalité fréquente du déplacement, mais qu'il vaut mieux connaître à l'avance pour décider comment l'introduire.",
+      'guide.credit':'Scénarios originaux développés au collège Kealing, avec des documents fournis par Mme Dita.',
+      'facts.kicker':"Point 04 — fiche d'information",'facts.title':'Mythes et faits','facts.myth':'MYTHE','facts.fact':'FAIT',
+      'facts.m1':'La plupart des réfugiés se réinstallent dans des pays occidentaux riches.','facts.f1':'La grande majorité est accueillie par des pays voisins à revenu faible ou intermédiaire, et non par des nations riches et lointaines.',
+      'facts.m2':'Les réfugiés partent pour des raisons économiques, comme d\'autres migrants.','facts.f2':'Les réfugiés fuient la persécution, le conflit ou la violence, et sont protégés par le droit international dans une catégorie distincte de la migration économique.',
+      'facts.m3':"Demander l'asile est un processus rapide ou automatique.",'facts.f3':"Les procédures d'asile et de réinstallation prennent souvent des années, avec des vérifications rigoureuses à chaque étape.",
+      'facts.m4':'Une fois qu\'une personne est réfugiée, ce statut est permanent.','facts.f4':"La plupart des réfugiés espèrent rentrer chez eux, et beaucoup le font quand les conditions le permettent — mais le déplacement dure souvent bien plus longtemps que ce à quoi on s'attend au départ.",
+      'facts.realH':'Ce que les gens emportent vraiment','facts.realIntro':"Dans les crises récentes, les mêmes objets reviennent sans cesse — avec tout ce qu'une famille ne peut se résoudre à laisser derrière elle.",
+      'facts.real1':'<strong>Ukraine :</strong> argent, passeports, papiers d\'identité, nourriture','facts.real2':'<strong>Soudan du Sud :</strong> argent, passeports, papiers d\'identité, nourriture','facts.real3':'<strong>Afghanistan :</strong> argent, passeports, papiers d\'identité, nourriture, un Coran','facts.real4':'<strong>RDC :</strong> argent, passeports, papiers d\'identité, nourriture',
+      'facts.sources_h':'Sources pour aller plus loin',
+      'events.eyebrow':'Et après','events.title':'Une série d\'événements, du plus simple au plus ambitieux','events.sub':"Rien de ce qui suit n'est encore confirmé — voici la feuille de route sur laquelle nous travaillons.",
+      'tier1.h':'Communauté — le plan à court terme','tier1.li1':"Projections de films associées à des collectes de fonds pour une association de réfugiés ou de demandeurs d'asile",'tier1.li2':'Tables rondes ouvertes à toute la communauté','tier1.li3':'Marque-pages gratuits avec recommandations de livres, films et statistiques, distribués dans les bibliothèques et librairies',
+      'tier2.h':'Campus','tier2.li1':"Amener l'activité façon Kealing dans d'autres collèges de l'AISD",
+      'tier3.h':'En tournée','tier3.li1':'Un pop-up au CANOA, à la Nouvelle-Orléans',
+      'game.eyebrow':'Jouez vous-même','game.title':'Le voyage','game.sub':"Un court jeu de décisions en solo. Il n'y a pas de coup gagnant — seulement des coûts différents.",'game.restart':'Recommencer',
+      'team.eyebrow':'Qui construit ce projet','team.title':'Équipe fondatrice','team.role':'Membre fondateur','team.cofounder':'Cofondateur',
+      'involve.eyebrow':'Participer','involve.title':'Trois façons de participer',
+      'involve.c1h':'Amenez-le dans votre école','involve.c1p':'Vous voulez mener l\'activité avec votre classe ou votre club ?',
+      'involve.c2h':'Aider lors d\'un événement','involve.c2p':'Les projections et tables rondes ont besoin de bras, avant et pendant.',
+      'involve.c3h':'Rester informé','involve.c3p':'Soyez prévenu quand le kit et les premiers événements seront lancés.',
+      'involve.contact':'contact : [ajouter un e-mail]','involve.signup':"[ajouter un lien d'inscription]",
+      'footer.l1':'The Refugee Advocacy Project — titre provisoire','footer.l2':'Créé par des élèves · Austin, TX',
+      'hud.health':'Santé','hud.money':'Argent','hud.time':'Temps',
+      'game.startEyebrow':'Un voyage interactif','game.startTitle':'LE VOYAGE','game.startTagline':'Chaque choix a un coût. Certains coûtent plus que d\'autres. Bonne chance.','game.startBtn':'Commencer le voyage',
+      'game.newEnding':'🏅 Nouvelle fin découverte !','game.allEndings':'Vous avez trouvé toutes les fins du jeu. Cela demande une vraie attention — bien joué.',
+      'game.qtPrompt':'Avancez vite et sans bruit.','game.qtButton':'Touchez pour avancer','game.qtSuccess':'Vous êtes passé sans un bruit.','game.qtFail':'Vous n\'avez pas été assez silencieux.',
+      'game.luckyBad':'Malchance — ça vous a coûté plus.','game.luckyGood':'Chance — vous vous en êtes sorti.','game.endingsFoundLabel':'Fins découvertes','game.streak':'🔥 Série de chance : {n} !',
+      game: {
+        endLabel: 'Fin',
+        prologue: { kicker:'Prologue', title:"Avant que l'on frappe", text:"Cela fait des semaines que vous entendez les rumeurs — que les combats se rapprochent, que d'autres dans votre rue font déjà des plans. Ce soir, vous n'êtes pas prêt. Personne ne l'est jamais vraiment.", choices:[{label:"Il n'y a plus de temps pour se préparer. Tout commence ici.", next:'start'}] },
+        start: { kicker:'Le jeu — Début', title:'4 heures du matin', text:"Quelqu'un frappe à la porte. Des soldats ont atteint la périphérie de la ville il y a une heure. Vous avez quelques minutes pour décider par où votre famille va partir.", choices:[{label:'Prendre le sentier de montagne — plus difficile, mais évite le poste de contrôle', next:'mountain'},{label:'Prendre la route du poste de contrôle — plus rapide, mais chaque papier est vérifié', next:'checkpoint'},{label:'Foncer directement vers la rivière, sans passer par le sentier', next:'river'}] },
+        mountain: { kicker:'Deux heures plus tard', title:'Le poids du sac', text:"Le sentier est plus raide que prévu. Le plus jeune ne peut plus porter son propre sac, et vous ne pouvez pas en porter deux.", choices:[{label:'Laisser le sac le plus lourd sur le chemin', next:'river'},{label:'Répartir la charge et ralentir', next:'exhausted'},{label:'Continuer sans vous arrêter, droit vers la crête', next:'ridge'}] },
+        checkpoint: { kicker:'Au poste de contrôle', title:'La main du garde', text:"Le garde feuillette vos papiers plus lentement que nécessaire. Il mentionne, presque en passant, que les choses vont plus vite pour ceux qui peuvent l'aider.", choices:[{label:'Répondre calmement et attendre', next:'detained'},{label:"Offrir l'argent que vous portez", next:'shortMoney'},{label:"Parler vite et passer avant qu'il ne regarde de plus près", next:'secondaryRoad'}] },
+        river: { kicker:'Trois heures plus tard', title:'La rivière', text:"Le sentier de montagne descend vers un passage à gué peu profond. Le courant est plus fort qu'il n'y paraît, et quelqu'un devra faire traverser les sacs en premier.", choices:[{label:"Faire traverser les sacs d'abord, puis revenir chercher la famille", next:'ridge'},{label:'Traverser tous ensemble, plus lentement mais unis', next:'ridge'},{label:'Continuer toute la nuit sans se reposer', next:'campArrival'}] },
+        exhausted: { kicker:'À la tombée de la nuit', title:'Plus de lumière', text:"Porter tout ce poids vous a considérablement ralenti, et le sentier de montagne n'est pas éclairé après la nuit tombée. Il faudra s'arrêter, ou continuer à l'aveugle.", choices:[{label:"Camper sur le sentier jusqu'au lever du jour", next:'ridge'},{label:'Continuer à la lumière du téléphone en espérant le meilleur', next:'accident'},{label:"Revenir en arrière pour trouver un détour plus sûr, même si cela coûte la nuit", next:'ridge'}] },
+        detained: { kicker:'Une heure plus tard', title:"Questions dans une arrière-salle", text:"Répondre calmement vous a fait gagner du temps, mais un second garde vous prend à part pour d'autres questions. Votre famille attend juste dehors, regardant par une fenêtre.", choices:[{label:'Répondre à chaque question exactement comme elle est posée', next:'secondaryRoad'},{label:"Demander, respectueusement, que votre famille soit aussi appelée", next:'secondaryRoad'},{label:'Refuser de répondre davantage et exiger de partir', next:'campArrival'}] },
+        shortMoney: { kicker:'Plus loin sur la route', title:'Poches vides', text:"L'argent vous a fait passer le premier poste de contrôle, mais un second vous attend plus loin, et vous n'avez plus rien à offrir.", choices:[{label:"Expliquer honnêtement qu'il ne vous reste rien", next:'secondaryRoad'},{label:"Échanger l'un de vos derniers biens à la place", next:'secondaryRoad'},{label:'Proposer de rembourser la dette en travaillant au poste-frontière', next:'secondaryRoad'}] },
+        ridge: { kicker:'Le lendemain matin', title:'La crête', text:"Au lever du soleil, vous avez grimpé assez haut pour voir le poste-frontière loin en contrebas — un ensemble de lumières et de toits, plus proche qu'hier, mais encore à une journée entière de marche.", choices:[{label:'Prendre le raccourci abrupt — plus rapide, mais un terrain plus risqué', next:'campArrival'},{label:'Prendre le long chemin en lacets — plus lent, mais plus sûr', next:'campArrival'},{label:"Demander de l'aide à d'autres voyageurs sur le sentier", next:'campArrival'}] },
+        secondaryRoad: { kicker:'Plus loin sur la route', title:'Le second poste de contrôle', text:"Un second poste de contrôle apparaît là où la carte disait qu'il n'y en aurait pas. Celui-ci est plus petit, moins officiel en apparence, et cela rend la situation encore plus difficile à anticiper.", choices:[{label:'Montrer tous vos documents et répondre à toutes les questions', next:'campArrival'},{label:"Prendre le chemin agricole pour le contourner, en espérant que personne ne regarde", next:'campArrival'},{label:'Soudoyer aussi ce garde, s\'il vous reste quelque chose', next:'campArrival'}] },
+        campArrival: { kicker:'Onze jours plus tard', title:'Le camp', text:"Vous avez atteint un camp à la frontière. Un travailleur social est assis en face de vous avec trois dossiers et aucune bonne option.", choices:[{label:'Attendre la procédure légale officielle — des années, mais en sécurité', next:'monthsWaiting'},{label:'Tenter une traversée non officielle ce soir', next:'crossingNight'},{label:'Accepter une offre de réinstallation, seul, loin de tous ceux que vous connaissez', next:'newCity'}] },
+        monthsWaiting: { kicker:'Huit mois plus tard', title:"Toujours dans la file", text:"Les démarches avancent plus lentement que promis. Votre numéro de dossier est bien réel, mais le calendrier aussi — et personne ne peut vous dire en quelle année cela se terminera.", choices:[{label:'Continuer à attendre ; la voie légale reste la plus sûre', next:'endingWaitLong'},{label:'La frustration l\'emporte ; chercher une sortie hors du système', next:'endingRiskLate'},{label:"Demander l'aide d'une association locale", next:'endingWaitLong'}] },
+        crossingNight: { kicker:'Cette nuit-là', title:'La traversée', text:"Vous partez sans lumières, sans carte fiable, en suivant un passeur qui ne donne pas son vrai nom. Chaque bruit derrière vous pourrait n'être rien — ou tout.", choices:[{label:"Continuer, quoi qu'il en coûte — s'arrêter risque de tous vous perdre", next:'endingRisk'},{label:'Retourner chercher celui qui est resté en arrière dans le noir', next:'riverLoss'},{label:'Payer le passeur davantage pour un itinéraire plus sûr', next:'endingRisk'}] },
+        accident: { kicker:'Près de minuit', title:"L'obscurité n'attend pas", text:"Quelqu'un fait un faux pas là où le sentier tourne près du ravin. Cela arrive vite, et le temps que le reste d'entre vous la rejoigne, il n'y a plus rien à faire que de lui dire au revoir. Il n'y a pas le temps de faire son deuil comme il faudrait — juste assez pour continuer à marcher, parce que s'arrêter n'est pas plus sûr pour les autres.", choices:[{label:"Continuer à marcher. Il n'existe aucune version de cela où vous pouvez vous arrêter.", next:'ridge'}] },
+        riverLoss: { kicker:"Dans l'eau", title:'Ce que le courant emporte', text:"Vous retournez. L'eau est plus rapide et plus froide qu'elle ne le paraissait depuis la berge, et le temps que vous l'atteigniez, il est déjà trop tard. Il n'y a pas de façon simple de porter cela — seulement continuer, et se souvenir que tous ceux qui entament une traversée n'arrivent pas de l'autre côté.", choices:[{label:'Continuer.', next:'endingRisk'}] },
+        newCity: { kicker:'Trois semaines plus tard', title:"Une ville qui n'est pas encore la vôtre", text:"Vous êtes arrivé quelque part en sécurité, avec un travailleur social, un appartement temporaire, et personne qui vous connaissait avant tout cela.", choices:[{label:'Aller vers les autres — un centre communautaire, un cours de langue, peu importe', next:'endingFarConnected'},{label:"Rester replié sur vous-même et vous concentrer seulement sur le travail pour l'instant", next:'endingFarIsolated'},{label:"Participer à une activité de groupe par semaine — peu, mais pas rien", next:'endingFarConnected'}] },
+        endingWaitLong: { kicker:'Quelque temps plus tard', title:"Des années d'attente", text:"C'est la fin la plus courante. Pas un seul danger spectaculaire, mais une longue suite de salles d'attente ordinaires, l'une après l'autre, bien plus longtemps que ce qu'on vous avait annoncé au départ.", choices:[{label:'Poursuivre.', next:'epilogueWaitLong'}] },
+        endingRiskLate: { kicker:'Quelque temps plus tard', title:'Hors des registres', text:"Vous avez laissé la procédure légale derrière vous pour une voie sans papiers et sans garanties. Certains qui empruntent ce chemin arrivent plus vite. D'autres n'arrivent pas du tout. Vous ne saurez lequel vous serez qu'une fois déjà parti.", choices:[{label:'Poursuivre.', next:'epilogueRiskLate'}] },
+        endingRisk: { kicker:'Juste après', title:'Le voyage continue', text:"Vous avez réussi à traverser. Personne ne peut vous dire ce qui se passe ensuite — pour ceux qui empruntent cette voie, l'histoire ne s'arrête pas à la frontière.", choices:[{label:'Poursuivre.', next:'epilogueRisk'}] },
+        endingFarConnected: { kicker:'Quelque temps plus tard', title:'Une communauté empruntée', text:"Ce n'est pas chez vous, et cela ne le sera peut-être jamais tout à fait. Mais six mois plus tard, vous connaissez les noms de vos voisins, et quelqu'un remarque votre absence.", choices:[{label:'Poursuivre.', next:'epilogueFarConnected'}] },
+        endingFarIsolated: { kicker:'Quelque temps plus tard', title:'En sécurité, et seul', text:"Vous êtes en sécurité, et vos enfants ont un avenir ici. Vous êtes aussi, un an plus tard, toujours la seule personne dans chaque pièce à se souvenir de qui vous étiez avant tout cela.", choices:[{label:'Poursuivre.', next:'epilogueFarIsolated'}] },
+        epilogueWaitLong: { kicker:'Fin', title:"Ce que l'attente a coûté", text:"Le jour où votre dossier est enfin approuvé, vous ne le ressentez presque pas. Vous avez tellement répété ce moment qu'il arrive presque en silence — du soulagement, oui, mais aussi l'étrange deuil des années que vous ne récupérerez pas.", ending:true },
+        epilogueRiskLate: { kicker:'Fin', title:'Aucune garantie', text:"Vous êtes passé, mais la voie que vous avez empruntée n'apparaît sur aucun formulaire que vous aurez à remplir à nouveau. Personne ne demande comment vous êtes arrivé ici. Vous avez remarqué que vous ne le proposez pas non plus.", ending:true },
+        epilogueRisk: { kicker:'Fin', title:"De l'autre côté, et toujours en mouvement", text:"Traverser n'a pas été la fin que vous imaginiez. Ce n'était que la première d'une longue série de frontières — légales, financières, émotionnelles — qui se dressaient encore entre vous et tout ce que vous pourriez appeler stable.", ending:true },
+        epilogueFarConnected: { kicker:'Fin', title:'Chez soi, avec le temps', text:"Cela a pris plus de temps que quiconque ne l'avait promis, mais quelque part entre les cours de langue et les dîners communautaires, cet endroit a cessé de ressembler au pays de quelqu'un d'autre.", ending:true },
+        epilogueFarIsolated: { kicker:'Fin', title:'Ceux qui se souviennent', text:"Vous vous êtes construit une bonne vie ici, sur le papier. Mais certaines nuits, vous vous surprenez encore à essayer de décrire, à des gens qui n'étaient pas là, une version de votre propre enfance qui n'existe plus nulle part ailleurs que dans votre mémoire.", ending:true },
+        gameOverHealth: { kicker:'Fin', title:'Le corps cède le premier', text:"L'épuisement n'a rien de spectaculaire. C'est juste un corps qui, silencieusement, cesse de pouvoir continuer, un jour comme un autre, sur une route qui n'était pas encore terminée.", ending:true },
+        gameOverMoney: { kicker:'Fin', title:'Plus rien à offrir', text:"Il arrive un moment où vous avez vendu, échangé ou dépensé tout ce que vous aviez emporté de chez vous, et la route n'est toujours pas finie. L'argent ne s'épuise pas avec fracas. Il n'est simplement plus là, exactement quand vous en avez le plus besoin.", ending:true },
+        gameOverTime: { kicker:'Fin', title:'Trop de temps a passé', text:"Il n'y a pas de moment spectaculaire quand le temps s'épuise. Juste une porte qui était ouverte, et qui, un jour ordinaire, ne l'était plus.", ending:true }
+      }
+    },
+    en: {
+      'hud.health':'Health','hud.money':'Money','hud.time':'Time',
+      'game.startEyebrow':'An interactive journey','game.startTitle':'THE JOURNEY','game.startTagline':'Every choice costs something. Some choices cost more than others. Good luck.','game.startBtn':'Begin the Journey',
+      'game.newEnding':'🏅 New ending discovered!','game.allEndings':"You've found every ending in the game. That takes real attention — well played.",
+      'game.qtPrompt':'Move quickly and quietly.','game.qtButton':'Tap to move','game.qtSuccess':'You slipped past without a sound.','game.qtFail':"You weren't quite quiet enough.",
+      'game.luckyBad':'Bad luck — that cost you more.','game.luckyGood':"Lucky — you got away with it.",'game.endingsFoundLabel':'Endings found','game.streak':'🔥 Lucky streak: {n}!',
+      game: {
+        endLabel: 'The End',
+        prologue: { kicker:'Prologue', title:'Before the Knock', text:"You've heard the rumors for weeks — that the fighting was getting closer, that others on your street were already making plans. Tonight, you're not ready. No one ever really is.", choices:[{label:"There's no more time to prepare. This is where it starts.", next:'start'}] },
+        start: { kicker:'The Game — Begin', title:'4 a.m.', text:"Someone is pounding on the door. Soldiers reached the edge of town an hour ago. You have minutes to decide which way your family leaves.", choices:[{label:'Take the mountain path — harder, but avoids the checkpoint', next:'mountain'},{label:'Take the checkpoint road — faster, but every paper gets checked', next:'checkpoint'},{label:'Push straight for the river crossing, skipping the trail entirely', next:'river'}] },
+        mountain: { kicker:'Two hours in', title:'The Weight of the Bag', text:"The trail is steeper than anyone told you. Your youngest can't carry their own pack anymore, and you can't carry two.", choices:[{label:'Leave the heaviest bag on the trail', next:'river'},{label:'Split the load and slow the pace', next:'exhausted'},{label:"Push through without stopping, straight for the ridge", next:'ridge'}] },
+        checkpoint: { kicker:'At the checkpoint', title:"The Guard's Hand", text:"The guard is flipping through your papers slower than he needs to. He mentions, almost casually, that things move faster for people who can help him out.", choices:[{label:'Answer calmly and wait him out', next:'detained'},{label:"Offer what money you're carrying", next:'shortMoney'},{label:"Talk fast and push through before he looks closer", next:'secondaryRoad'}] },
+        river: { kicker:'Three hours in', title:'The River', text:"The mountain path drops into a shallow river crossing. The current is stronger than it looks, and someone will have to carry the bags across first.", choices:[{label:'Carry the bags across first, then come back for the family', next:'ridge'},{label:'Everyone crosses together, slower but united', next:'ridge'},{label:'Push on through the night without resting at all', next:'campArrival'}] },
+        exhausted: { kicker:'By nightfall', title:'No Light Left', text:"Carrying everything has slowed you to a crawl, and the mountain path is unlit after dark. You'll have to stop, or press on blind.", choices:[{label:'Make camp on the trail until sunrise', next:'ridge'},{label:'Press on by phone light and hope', next:'accident'},{label:'Backtrack to find a safer detour, even though it costs the night', next:'ridge'}] },
+        detained: { kicker:'An hour later', title:'Questions in a Back Room', text:"Answering calmly bought you time, but a second guard pulls you aside for more questions. Your family waits just outside, watching through a window.", choices:[{label:'Answer every question exactly as asked', next:'secondaryRoad'},{label:'Ask, respectfully, to have your family called in too', next:'secondaryRoad'},{label:'Refuse to answer further and demand to leave', next:'campArrival'}] },
+        shortMoney: { kicker:'Down the road', title:'Empty Pockets', text:"The money bought you through the first checkpoint, but there's a second one ahead, and you have nothing left to offer.", choices:[{label:'Explain honestly that you have nothing left', next:'secondaryRoad'},{label:'Trade one of your remaining belongings instead', next:'secondaryRoad'},{label:'Offer to work off the debt at the border post', next:'secondaryRoad'}] },
+        ridge: { kicker:'The next morning', title:'The Ridge', text:"By sunrise you've climbed high enough to see the border crossing far below — a cluster of lights and rooftops, closer than it looked yesterday but still a full day's walk.", choices:[{label:'Take the steep shortcut down — faster, riskier footing', next:'campArrival'},{label:'Take the longer switchback trail — slower, but safer', next:'campArrival'},{label:'Signal for help from other travelers on the trail', next:'campArrival'}] },
+        secondaryRoad: { kicker:'Further down the road', title:'The Second Checkpoint', text:"A second checkpoint appears where the map said there'd be none. This one is smaller, less official-looking, and somehow that makes it harder to know what to expect.", choices:[{label:'Show every document you have and answer everything asked', next:'campArrival'},{label:"Take the farm road around it, hoping no one's watching", next:'campArrival'},{label:'Bribe this guard too, if there\'s anything left', next:'campArrival'}] },
+        campArrival: { kicker:'Eleven days later', title:'The Camp', text:"You've reached a camp at the border. A caseworker sits across from you with three folders and no good options.", choices:[{label:'Wait for the official legal process — years, but safe', next:'monthsWaiting'},{label:'Attempt an unofficial crossing tonight', next:'crossingNight'},{label:'Accept a resettlement offer, alone, far from anyone you know', next:'newCity'}] },
+        monthsWaiting: { kicker:'Eight months later', title:'Still in Line', text:"The paperwork moves slower than anyone promised. Your case number is real, but so is the calendar — and no one can tell you which year this ends.", choices:[{label:'Keep waiting; the legal path is still the safest one', next:'endingWaitLong'},{label:'Frustration wins; look for a way out of the system entirely', next:'endingRiskLate'},{label:'Reach out to a local aid organization for help', next:'endingWaitLong'}] },
+        crossingNight: { kicker:'That night', title:'The Crossing', text:"You go without lights, without a map you trust, following a guide who won't give his real name. Every sound behind you could be nothing, or could be everything.", choices:[{label:'Keep moving — stopping risks losing everyone', next:'endingRisk'},{label:"Go back for the one who's fallen behind in the dark", next:'riverLoss'},{label:'Pay the guide extra for a longer but safer route', next:'endingRisk'}] },
+        accident: { kicker:'Near midnight', title:"The Dark Doesn't Wait", text:"Someone misjudges the trail where it bends near the drop-off. It happens fast, and by the time the rest of you reach her, there's nothing left to do but say goodbye. There's no time to grieve properly — only enough to keep walking, because stopping isn't safer for anyone else.", choices:[{label:"Keep walking. There isn't a version of this where you get to stop.", next:'ridge'}] },
+        riverLoss: { kicker:'In the water', title:'What the Current Takes', text:"You go back. The water is faster and colder than it looked from the bank, and by the time you reach him, it's already too late. There's no clean way to carry this forward — only to keep moving, and to remember that not everyone who starts a crossing makes it to the other side.", choices:[{label:'Keep moving.', next:'endingRisk'}] },
+        newCity: { kicker:'Three weeks later', title:"A City That Isn't Yours Yet", text:"You've arrived somewhere safe, with a caseworker, a temporary apartment, and no one who knew you before any of this.", choices:[{label:'Reach out — a community center, a language class, anything', next:'endingFarConnected'},{label:'Keep to yourself and focus only on work for now', next:'endingFarIsolated'},{label:"Join one group activity a week — not much, but not nothing", next:'endingFarConnected'}] },
+        endingWaitLong: { kicker:'Some time later', title:'Years of Waiting', text:"This is the most common ending. Not a single dramatic danger, but a long line of ordinary waiting rooms, one after another, for longer than anyone told you at the start.", choices:[{label:'Keep going.', next:'epilogueWaitLong'}] },
+        endingRiskLate: { kicker:'Some time later', title:'Off the Record', text:"You left the legal process behind for a route with no paperwork and no guarantees. Some who take this path arrive faster. Some don't arrive at all. You don't get to know which one you'll be until you're already gone.", choices:[{label:'Keep going.', next:'epilogueRiskLate'}] },
+        endingRisk: { kicker:'Just after', title:'The Journey Continues', text:"You made it across. No one can tell you what happens next — for the people who take this route, the story doesn't end at the border.", choices:[{label:'Keep going.', next:'epilogueRisk'}] },
+        endingFarConnected: { kicker:'Some time later', title:'A Borrowed Community', text:"It's not home, and it may never quite feel like it. But six months in, you know your neighbors' names, and someone notices when you don't show up.", choices:[{label:'Keep going.', next:'epilogueFarConnected'}] },
+        endingFarIsolated: { kicker:'Some time later', title:'Safe, and Alone', text:"You're safe, and your children have a future here. You're also still, a year later, the only person in any room who remembers who you were before any of this.", choices:[{label:'Keep going.', next:'epilogueFarIsolated'}] },
+        epilogueWaitLong: { kicker:'Ending', title:'What the Waiting Cost', text:"The day your case is finally approved, you barely feel it. You've spent so long rehearsing this moment that the real one arrives almost quietly — relief, yes, but also the strange grief of years you can't get back.", ending:true },
+        epilogueRiskLate: { kicker:'Ending', title:'No Guarantees', text:"You're through, but the route you took doesn't show up on any form you'll ever need to fill out again. No one asks how you got here. You've noticed you don't offer it either.", ending:true },
+        epilogueRisk: { kicker:'Ending', title:'Across, and Still Moving', text:"Crossing wasn't the ending you thought it would be. It was just the first of many borders — legal, financial, emotional — that still stood between you and anything you'd call settled.", ending:true },
+        epilogueFarConnected: { kicker:'Ending', title:'Home, Eventually', text:"It took longer than anyone promised, but somewhere between the language classes and the community dinners, this stopped feeling like someone else's country.", ending:true },
+        epilogueFarIsolated: { kicker:'Ending', title:'The Ones Who Remember', text:"You built a good life here, on paper. But some nights you still find yourself trying to describe, to people who weren't there, a version of your own childhood that no longer exists anywhere but in your memory.", ending:true },
+        gameOverHealth: { kicker:'Ending', title:'The Body Gives Out First', text:"Exhaustion isn't dramatic. It's just a body that quietly stops being able to keep going, on a day like any other, on a road that still had further to go.", ending:true },
+        gameOverMoney: { kicker:'Ending', title:'Nothing Left to Trade', text:"There's a point where you've sold, traded, or spent everything you left home with, and the road still isn't finished. Money doesn't run out with a bang. It just isn't there anymore, exactly when you need it most.", ending:true },
+        gameOverTime: { kicker:'Ending', title:'Too Much Time Has Passed', text:"There's no dramatic moment when time runs out. Just a door that was open, and then, one ordinary day, wasn't.", ending:true }
+      }
+    }
+  };
+
+  // capture original English text so we can restore it
+  const i18nEls = Array.from(document.querySelectorAll('[data-i18n]')).map(el => {
+    el.dataset.i18nOriginal = el.innerHTML;
+    return { el, key: el.dataset.i18n };
+  });
+
+  let currentLang = 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    i18nEls.forEach(({ el, key }) => {
+      if (lang === 'en') {
+        el.innerHTML = el.dataset.i18nOriginal;
+      } else if (translations[lang] && translations[lang][key] !== undefined) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.documentElement.lang = lang;
+    refreshGameText();
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+
+  // ---- the game: scene + walking figures ----
+  const gamePalette = {
+    ink: '#2b2620', paper: '#ede6d6', paperLight: '#f6f1e6',
+    stampRed: '#a33b2e', travelBlue: '#24445c', gold: '#a4823f', manila: '#d8c9a3'
+  };
+
+  const gameScenes = {
+    prologue: 'house', start: 'night', mountain: 'mountainDusk', checkpoint: 'checkpointScene',
+    river: 'water', exhausted: 'darkTrail', detained: 'checkpointScene', shortMoney: 'roadDusk',
+    ridge: 'ridgeView', secondaryRoad: 'roadDusk', campArrival: 'campScene', monthsWaiting: 'campScene',
+    crossingNight: 'nightBorder', newCity: 'citySkyline',
+    accident: 'darkTrail', riverLoss: 'nightBorder',
+    endingWaitLong: 'campScene', endingRiskLate: 'nightBorder', endingRisk: 'nightBorder',
+    endingFarConnected: 'citySkyline', endingFarIsolated: 'citySkyline',
+    epilogueWaitLong: 'dawn', epilogueRiskLate: 'dawn', epilogueRisk: 'dawn',
+    epilogueFarConnected: 'dawn', epilogueFarIsolated: 'dawn',
+    gameOverHealth: 'darkTrail', gameOverMoney: 'nightBorder', gameOverTime: 'campScene'
+  };
+
+  const canvas = document.getElementById('game-canvas');
+  const ctx = canvas ? canvas.getContext('2d') : null;
+  const stage = document.getElementById('game-stage');
+
+  function lerpColor(a, b, t) {
+    const pa = [parseInt(a.slice(1,3),16), parseInt(a.slice(3,5),16), parseInt(a.slice(5,7),16)];
+    const pb = [parseInt(b.slice(1,3),16), parseInt(b.slice(3,5),16), parseInt(b.slice(5,7),16)];
+    const r = Math.round(pa[0]+(pb[0]-pa[0])*t), g = Math.round(pa[1]+(pb[1]-pa[1])*t), bl = Math.round(pa[2]+(pb[2]-pa[2])*t);
+    return `rgb(${r},${g},${bl})`;
+  }
+
+  function drawSky(w, h, topColor, bottomColor) {
+    const grad = ctx.createLinearGradient(0, 0, 0, h*0.78);
+    grad.addColorStop(0, topColor);
+    grad.addColorStop(1, bottomColor);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h*0.78);
+  }
+
+  function drawGround(w, h, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(0, h*0.78, w, h*0.22);
+  }
+
+  function drawStars(w, h, count) {
+    ctx.fillStyle = 'rgba(246,241,230,0.8)';
+    for (let i = 0; i < count; i++) {
+      const sx = (i * 97 + 31) % w;
+      const sy = (i * 53 + 11) % (h * 0.5);
+      ctx.fillRect(sx, sy, 2, 2);
+    }
+  }
+
+  function drawMoon(x, y, r) {
+    ctx.fillStyle = gamePalette.manila;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
+  }
+
+  function drawMountains(w, h, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(0, h*0.78);
+    ctx.lineTo(w*0.15, h*0.5); ctx.lineTo(w*0.32, h*0.72);
+    ctx.lineTo(w*0.5, h*0.42); ctx.lineTo(w*0.68, h*0.7);
+    ctx.lineTo(w*0.85, h*0.48); ctx.lineTo(w, h*0.78);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function drawScene(w, h, scene) {
+    ctx.clearRect(0, 0, w, h);
+    switch (scene) {
+      case 'house':
+        drawSky(w, h, '#16232e', gamePalette.travelBlue);
+        drawStars(w, h, 30);
+        drawMoon(w*0.85, h*0.16, 14);
+        drawGround(w, h, gamePalette.ink);
+        ctx.fillStyle = gamePalette.ink;
+        ctx.fillRect(w*0.08, h*0.5, w*0.18, h*0.28);
+        ctx.beginPath(); ctx.moveTo(w*0.06, h*0.5); ctx.lineTo(w*0.17, h*0.36); ctx.lineTo(w*0.28, h*0.5); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = gamePalette.gold;
+        ctx.fillRect(w*0.14, h*0.58, w*0.05, h*0.06);
+        break;
+      case 'night':
+        drawSky(w, h, '#16232e', gamePalette.travelBlue);
+        drawStars(w, h, 40);
+        drawMoon(w*0.15, h*0.18, 16);
+        drawGround(w, h, gamePalette.ink);
+        break;
+      case 'mountainDusk':
+        drawSky(w, h, '#7a3b34', gamePalette.gold);
+        drawMountains(w, h, '#3a2620');
+        drawGround(w, h, gamePalette.ink);
+        break;
+      case 'water':
+        drawSky(w, h, gamePalette.travelBlue, gamePalette.paperLight);
+        drawMountains(w, h, '#3f5e73');
+        ctx.fillStyle = '#2f5872';
+        ctx.fillRect(0, h*0.78, w, h*0.22);
+        ctx.strokeStyle = 'rgba(246,241,230,0.35)';
+        ctx.lineWidth = 2;
+        for (let i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, h*0.82 + i*8);
+          for (let x = 0; x <= w; x += 20) ctx.lineTo(x, h*0.82 + i*8 + Math.sin(x*0.05+i)*3);
+          ctx.stroke();
+        }
+        break;
+      case 'darkTrail':
+        drawSky(w, h, '#0f1a22', '#1c2b36');
+        drawStars(w, h, 14);
+        drawGround(w, h, gamePalette.ink);
+        ctx.fillStyle = '#111';
+        [0.1,0.25,0.75,0.9].forEach(px => {
+          ctx.beginPath(); ctx.moveTo(w*px, h*0.78); ctx.lineTo(w*px+8, h*0.55); ctx.lineTo(w*px+16, h*0.78); ctx.closePath(); ctx.fill();
+        });
+        break;
+      case 'checkpointScene':
+        drawSky(w, h, '#4a4038', '#8a7460');
+        drawGround(w, h, gamePalette.ink);
+        ctx.fillStyle = gamePalette.paperLight;
+        ctx.fillRect(w*0.35, h*0.6, w*0.3, h*0.08);
+        for (let i=0;i<6;i++){ ctx.fillStyle = i%2===0 ? gamePalette.stampRed : gamePalette.paperLight; ctx.fillRect(w*0.35 + i*(w*0.05), h*0.6, w*0.05, h*0.08); }
+        ctx.fillStyle = gamePalette.ink;
+        ctx.fillRect(w*0.72, h*0.5, w*0.12, h*0.28);
+        break;
+      case 'roadDusk':
+        drawSky(w, h, '#7a4d3b', gamePalette.gold);
+        drawGround(w, h, '#4a3c2e');
+        ctx.fillStyle = gamePalette.ink;
+        for (let i=0;i<8;i++) ctx.fillRect(w*0.05 + i*(w*0.12), h*0.72, 3, h*0.1);
+        break;
+      case 'ridgeView':
+        drawSky(w, h, gamePalette.gold, gamePalette.paperLight);
+        drawMountains(w, h, '#8a6a4a');
+        drawGround(w, h, '#5a4a38');
+        ctx.fillStyle = gamePalette.gold;
+        for (let i=0;i<10;i++) ctx.fillRect(w*0.2 + i*(w*0.06), h*0.76, 2, 2);
+        break;
+      case 'campScene':
+        drawSky(w, h, gamePalette.travelBlue, '#5a6f7a');
+        drawGround(w, h, '#4a3c2e');
+        for (let i=0;i<5;i++) {
+          const tx = w*0.15 + i*(w*0.16);
+          ctx.fillStyle = gamePalette.manila;
+          ctx.beginPath(); ctx.moveTo(tx, h*0.78); ctx.lineTo(tx+22, h*0.55); ctx.lineTo(tx+44, h*0.78); ctx.closePath(); ctx.fill();
+          ctx.strokeStyle = gamePalette.ink; ctx.stroke();
+        }
+        break;
+      case 'nightBorder':
+        drawSky(w, h, '#0d1420', '#1a2a38');
+        drawStars(w, h, 20);
+        drawGround(w, h, gamePalette.ink);
+        ctx.strokeStyle = 'rgba(216,201,163,0.5)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, h*0.7); ctx.lineTo(w, h*0.66); ctx.stroke();
+        for (let i=0;i<12;i++){ ctx.beginPath(); ctx.moveTo(i*(w/12), h*0.78); ctx.lineTo(i*(w/12), h*0.6); ctx.stroke(); }
+        break;
+      case 'citySkyline':
+        drawSky(w, h, gamePalette.travelBlue, gamePalette.gold);
+        drawGround(w, h, gamePalette.ink);
+        for (let i=0;i<7;i++) {
+          const bw = w*0.08, bx = w*0.05 + i*(w*0.13), bh = h*(0.25 + (i%3)*0.12);
+          ctx.fillStyle = gamePalette.ink;
+          ctx.fillRect(bx, h*0.78-bh, bw, bh);
+          ctx.fillStyle = gamePalette.gold;
+          for (let wy=0; wy<bh-10; wy+=14) ctx.fillRect(bx+6, h*0.78-bh+wy+6, 4, 4);
+        }
+        break;
+      case 'dawn':
+        drawSky(w, h, gamePalette.gold, gamePalette.paperLight);
+        ctx.fillStyle = 'rgba(246,241,230,0.9)';
+        ctx.beginPath(); ctx.arc(w*0.5, h*0.78, h*0.16, Math.PI, 0); ctx.fill();
+        drawGround(w, h, '#6a5a44');
+        break;
+      default:
+        drawSky(w, h, gamePalette.travelBlue, gamePalette.paperLight);
+        drawGround(w, h, gamePalette.ink);
+    }
+  }
+
+  function drawPerson(x, groundY, scale, phase, walking) {
+    const legSwing = walking ? Math.sin(phase) * 10 * scale : Math.sin(phase*0.4) * 1.5 * scale;
+    const armSwing = walking ? Math.sin(phase + Math.PI) * 8 * scale : 0;
+    const bounce = walking ? Math.abs(Math.sin(phase)) * 3 * scale : 0;
+    groundY -= bounce;
+    ctx.strokeStyle = gamePalette.ink;
+    ctx.lineWidth = 2.6 * scale;
+    ctx.lineCap = 'round';
+    const hipY = groundY - 20*scale;
+    const shoulderY = groundY - 38*scale;
+    const headY = groundY - 46*scale;
+    // legs
+    ctx.beginPath(); ctx.moveTo(x, hipY); ctx.lineTo(x + legSwing, groundY + bounce); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, hipY); ctx.lineTo(x - legSwing, groundY + bounce); ctx.stroke();
+    // body
+    ctx.beginPath(); ctx.moveTo(x, hipY); ctx.lineTo(x, shoulderY); ctx.stroke();
+    // arms
+    ctx.beginPath(); ctx.moveTo(x, shoulderY+4*scale); ctx.lineTo(x + armSwing, hipY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, shoulderY+4*scale); ctx.lineTo(x - armSwing, hipY); ctx.stroke();
+    // head
+    ctx.fillStyle = gamePalette.ink;
+    ctx.beginPath(); ctx.arc(x, headY, 6*scale, 0, Math.PI*2); ctx.fill();
+  }
+
+  function drawWalkers(centerX, groundY, walking, now) {
+    const phase = now / 130;
+    drawPerson(centerX, groundY, 1, phase, walking);
+    drawPerson(centerX - 26, groundY - 2, 0.72, phase + 0.6, walking);
+    drawPerson(centerX - 46, groundY - 1, 0.6, phase + 1.1, walking);
+  }
+
+  // ---- particles (confetti for good endings, ash for game-over) ----
+  let particles = [];
+  function spawnParticles(kind, w, h) {
+    const confettiColors = [gamePalette.gold, gamePalette.stampRed, gamePalette.travelBlue, gamePalette.manila];
+    const count = kind === 'confetti' ? 50 : 26;
+    for (let i = 0; i < count; i++) {
+      if (kind === 'confetti') {
+        particles.push({
+          x: w/2 + (Math.random()*2-1)*30, y: h*0.4 + (Math.random()*2-1)*20,
+          vx: (Math.random()*2-1) * 3.2, vy: -2 - Math.random()*3,
+          size: 3 + Math.random()*3, color: confettiColors[i % confettiColors.length],
+          life: 1, decay: 0.006 + Math.random()*0.006, gravity: 0.09, rot: Math.random()*Math.PI, vr: (Math.random()*2-1)*0.2
+        });
+      } else {
+        particles.push({
+          x: Math.random()*w, y: -10 - Math.random()*40,
+          vx: (Math.random()*2-1) * 0.4, vy: 0.4 + Math.random()*0.6,
+          size: 2 + Math.random()*2, color: 'rgba(216,201,163,0.6)',
+          life: 1, decay: 0.003 + Math.random()*0.003, gravity: 0.01, rot: 0, vr: 0
+        });
+      }
+    }
+  }
+  function updateAndDrawParticles(w, h) {
+    if (!particles.length) return;
+    particles = particles.filter(p => p.life > 0 && p.y < h + 20);
+    particles.forEach(p => {
+      p.vy += p.gravity;
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      p.life -= p.decay;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+      ctx.restore();
+    });
+  }
+
+  // ---- animation + node state ----
+  let gameNode = 'prologue';
+  const gameAnim = { scene: gameScenes.prologue, phase: 'title', phaseStart: performance.now(), walkOutCallback: null, flashColor: null, flashStart: 0, flashUntil: 0, shakeStart: 0, shakeUntil: 0 };
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const walkInDur = reduceMotion ? 1 : 900;
+  const walkOutDur = reduceMotion ? 1 : 600;
+  let crossingQTDone = false;
+  let crossingRiskModifier = 0;
+
+  // choice costs: keyed by node id, one entry per choice index (language-independent)
+  const gameCosts = {
+    start: [{health:-2}, {}, {health:-2}],
+    mountain: [{money:-2}, {time:-2}, {health:-2, money:-1}],
+    checkpoint: [{time:-2}, {money:-2}, {health:-1, risk:{chance:0.3, penalty:{health:-1}}}],
+    river: [{health:-2}, {time:-2}, {health:-2}],
+    exhausted: [{time:-2}, {health:-1}, {time:-2, money:-1}],
+    detained: [{time:-2}, {health:-1, risk:{chance:0.3, penalty:{health:-1}}}, {health:-2, risk:{chance:0.35, penalty:{health:-1}}}],
+    shortMoney: [{time:-1}, {money:-1}, {time:-2}],
+    ridge: [{health:-2}, {time:-2}, {risk:{chance:0.35, penalty:{money:-2}}}],
+    secondaryRoad: [{time:-2}, {health:-1, risk:{chance:0.4, penalty:{health:-1}}}, {money:-2}],
+    campArrival: [{time:-2}, {health:-1}, {money:-1}],
+    monthsWaiting: [{time:-2}, {money:-1, risk:{chance:0.35, penalty:{money:-1}}}, {time:-1}],
+    crossingNight: [{health:-1, risk:{chance:0.35, penalty:{health:-1}}}, {health:-2}, {money:-2, time:-1}],
+    newCity: [{money:-1}, {health:-1}, {health:-1, time:-1}],
+    accident: [{health:-2}],
+    riverLoss: [{health:-2}]
+  };
+  const STAT_MAX = 5, STAT_MIN = 0;
+  const gameStats = { health: 5, money: 5, time: 5 };
+  const gameEndingsSeen = new Set();
+  const TOTAL_ENDINGS = 8;
+
+  function clampStat(v) { return Math.max(STAT_MIN, Math.min(STAT_MAX, v)); }
+
+  function hudLabel(key) {
+    return (translations[currentLang] && translations[currentLang][key])
+      || (translations.en && translations.en[key])
+      || key;
+  }
+
+  // ---- sound engine (synthesized, no audio files) ----
+  let audioCtx = null;
+  let soundMuted = false;
+  function ensureAudio() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { audioCtx = null; }
+    }
+    return audioCtx;
+  }
+  function playTone(freq, dur, type, vol, delay) {
+    if (soundMuted) return;
+    const ctx = ensureAudio();
+    if (!ctx) return;
+    const start = ctx.currentTime + (delay || 0);
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, start);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(vol || 0.14, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(start); osc.stop(start + dur + 0.02);
+  }
+  function sfxStatLoss() { playTone(150, 0.22, 'square', 0.1); }
+  function sfxStatGain() { playTone(660, 0.16, 'sine', 0.1); }
+  function sfxLuckyGood() { playTone(520, 0.1, 'sine', 0.1); playTone(820, 0.16, 'sine', 0.1, 0.09); }
+  function sfxLuckyBad() { playTone(200, 0.28, 'sawtooth', 0.12); }
+  function sfxClick() { playTone(380, 0.06, 'square', 0.06); }
+  function sfxArrive() { playTone(440, 0.12, 'sine', 0.07); }
+  function sfxEnding() { playTone(440, 0.14, 'sine', 0.1); playTone(554, 0.14, 'sine', 0.1, 0.12); playTone(660, 0.24, 'sine', 0.1, 0.24); }
+  function sfxGameOver() { playTone(220, 0.3, 'sawtooth', 0.1); playTone(160, 0.4, 'sawtooth', 0.1, 0.22); }
+
+  const muteBtn = document.getElementById('game-mute');
+  if (muteBtn) {
+    muteBtn.addEventListener('click', () => {
+      soundMuted = !soundMuted;
+      muteBtn.classList.toggle('muted', soundMuted);
+      muteBtn.innerHTML = soundMuted ? '&#128263;' : '&#128266;';
+      if (!soundMuted) { ensureAudio(); sfxClick(); }
+    });
+  }
+
+  const fullscreenBtn = document.getElementById('game-fullscreen');
+  const gameBox = document.getElementById('game-box');
+  function isFullscreen() {
+    return document.fullscreenElement || document.webkitFullscreenElement;
+  }
+  function updateFullscreenBtn() {
+    if (!fullscreenBtn) return;
+    fullscreenBtn.innerHTML = isFullscreen() ? '&#10005;' : '&#9974;';
+    fullscreenBtn.setAttribute('aria-label', isFullscreen() ? 'Exit fullscreen' : 'Toggle fullscreen');
+  }
+  if (fullscreenBtn && gameBox) {
+    fullscreenBtn.addEventListener('click', () => {
+      sfxClick();
+      if (!isFullscreen()) {
+        const req = gameBox.requestFullscreen || gameBox.webkitRequestFullscreen;
+        if (req) req.call(gameBox);
+      } else {
+        const exit = document.exitFullscreen || document.webkitExitFullscreen;
+        if (exit) exit.call(document);
+      }
+    });
+    document.addEventListener('fullscreenchange', updateFullscreenBtn);
+    document.addEventListener('webkitfullscreenchange', updateFullscreenBtn);
+  }
+
+  // ---- HUD, floating deltas, pulse ----
+  const STAT_KEYS = ['health', 'money', 'time'];
+
+  function updateHUD() {
+    const hud = document.getElementById('game-hud');
+    if (!hud) return;
+    function hearts(value) {
+      let out = '';
+      for (let i = 0; i < STAT_MAX; i++) out += `<span class="${i < value ? 'filled' : 'empty'}">${i < value ? '❤️' : '🤍'}</span>`;
+      return out;
+    }
+    function coins(value) {
+      let out = '';
+      for (let i = 0; i < STAT_MAX; i++) out += `<span class="coin-icon ${i < value ? 'filled' : 'empty'}">$</span>`;
+      return out;
+    }
+    function clocks(value) {
+      let out = '';
+      const svg = '<svg viewBox="0 0 14 14" width="13" height="13"><circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><line x1="7" y1="7" x2="7" y2="3.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="7" y1="7" x2="9.6" y2="7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+      for (let i = 0; i < STAT_MAX; i++) out += `<span class="clock-icon ${i < value ? 'filled' : 'empty'}">${svg}</span>`;
+      return out;
+    }
+    hud.innerHTML =
+      `<span class="hud-item" id="hud-health">${hudLabel('hud.health')}: <span class="hud-dots">${hearts(gameStats.health)}</span></span>` +
+      `<span class="hud-item" id="hud-money">${hudLabel('hud.money')}: <span class="hud-dots">${coins(gameStats.money)}</span></span>` +
+      `<span class="hud-item" id="hud-time">${hudLabel('hud.time')}: <span class="hud-dots">${clocks(gameStats.time)}</span></span>`;
+  }
+
+  function announceStatChange(statKey, delta) {
+    if (!delta) return;
+    const item = document.getElementById('hud-' + statKey);
+    if (item) {
+      item.classList.remove('pulse-bad', 'pulse-good');
+      void item.offsetWidth;
+      item.classList.add(delta < 0 ? 'pulse-bad' : 'pulse-good');
+      const float = document.createElement('span');
+      float.className = 'float-delta ' + (delta < 0 ? 'bad' : 'good');
+      float.textContent = (delta > 0 ? '+' : '') + delta;
+      item.appendChild(float);
+      setTimeout(() => float.remove(), 1000);
+    }
+    if (delta < 0) { sfxStatLoss(); triggerShake(280); }
+    else { sfxStatGain(); }
+  }
+
+  function computeAndApplyCost(cost) {
+    if (!cost) return { failedStat: null, deltas: {} };
+    let failedStat = null;
+    const deltas = {};
+    STAT_KEYS.forEach(key => {
+      if (cost[key]) {
+        const raw = gameStats[key] + cost[key];
+        if (raw < 0) failedStat = failedStat || key;
+        const clamped = clampStat(raw);
+        deltas[key] = clamped - gameStats[key];
+        gameStats[key] = clamped;
+      }
+    });
+    return { failedStat, deltas };
+  }
+
+  function finalizeStatChanges(deltasList) {
+    const merged = {};
+    deltasList.forEach(d => {
+      STAT_KEYS.forEach(key => {
+        if (d[key]) merged[key] = (merged[key] || 0) + d[key];
+      });
+    });
+    updateHUD();
+    STAT_KEYS.forEach(key => { if (merged[key]) announceStatChange(key, merged[key]); });
+  }
+
+  function resetStats() {
+    gameStats.health = 5;
+    gameStats.money = 5;
+    gameStats.time = 5;
+    updateHUD();
+  }
+
+  function currentGameDict() {
+    return (translations[currentLang] && translations[currentLang].game) || translations.en.game;
+  }
+
+  function showToast(text, cls) {
+    const toast = document.getElementById('game-toast');
+    if (!toast) return;
+    toast.textContent = text;
+    toast.className = 'game-toast mono show' + (cls ? ' ' + cls : '');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => { toast.classList.remove('show'); }, 1600);
+  }
+
+  function triggerFlash(color, ms) {
+    gameAnim.flashColor = color;
+    gameAnim.flashStart = performance.now();
+    gameAnim.flashUntil = gameAnim.flashStart + ms;
+  }
+
+  function triggerShake(ms) {
+    gameAnim.shakeStart = performance.now();
+    gameAnim.shakeUntil = gameAnim.shakeStart + ms;
+  }
+
+  function buildDialogueHTML(node, dict) {
+    let html = `<span class="kicker">${node.kicker}</span><h3>${node.title}</h3><p>${node.text}</p>`;
+    if (node.ending) {
+      const isGameOver = gameNode === 'gameOverHealth' || gameNode === 'gameOverMoney';
+      const isNew = !gameEndingsSeen.has(gameNode);
+      gameEndingsSeen.add(gameNode);
+      isGameOver ? sfxGameOver() : sfxEnding();
+      if (canvas) spawnParticles(isGameOver ? 'ash' : 'confetti', canvas.width, canvas.height);
+      if (isNew) {
+        html = `<p class="game-achievement">${hudLabel('game.newEnding')}</p>` + html;
+      }
+      html += `<span class="game-ending-tag">${dict.endLabel}</span>`;
+      html += `<p class="meta-line" style="margin-top:14px;">${hudLabel('game.endingsFoundLabel')}: ${gameEndingsSeen.size}/${TOTAL_ENDINGS}</p>`;
+      if (isNew && gameEndingsSeen.size === TOTAL_ENDINGS) {
+        html += `<p class="game-achievement">${hudLabel('game.allEndings')}</p>`;
+      }
+    } else {
+      html += '<div class="game-choices">' + node.choices.map((c, i) =>
+        `<button class="game-choice-btn" data-next="${c.next}" data-index="${i}">${c.label}</button>`
+      ).join('') + '</div>';
+    }
+    return html;
+  }
+
+  function showDialogueForCurrentNode() {
+    const dict = currentGameDict();
+    const node = dict[gameNode];
+    if (!stage || !node) return;
+    stage.innerHTML = buildDialogueHTML(node, dict);
+    stage.querySelectorAll('.game-choice-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleChoice(btn.dataset.next, parseInt(btn.dataset.index, 10)));
+    });
+    stage.classList.add('visible');
+  }
+
+  let inQuickTime = false;
+  function refreshGameText() {
+    if (!stage) return;
+    updateHUD();
+    if (gameAnim.phase === 'title') { showTitleScreen(); return; }
+    if (inQuickTime) return;
+    if (gameAnim.phase === 'idle') showDialogueForCurrentNode();
+  }
+
+  let luckStreak = 0;
+  function describeDeltas(deltas) {
+    const parts = [];
+    STAT_KEYS.forEach(k => {
+      if (deltas[k]) parts.push(Math.abs(deltas[k]) + ' ' + hudLabel('hud.' + k));
+    });
+    return parts.join(', ');
+  }
+
+  function handleChoice(next, index) {
+    if (!stage) return;
+    sfxClick();
+    const costsForNode = gameCosts[gameNode];
+    const costObj = costsForNode && costsForNode[index];
+    let failedStat = null;
+    const deltasList = [];
+    if (costObj) {
+      const r = computeAndApplyCost(costObj);
+      failedStat = r.failedStat;
+      deltasList.push(r.deltas);
+    }
+    if (costObj && costObj.risk && !failedStat) {
+      let chance = costObj.risk.chance;
+      if (gameNode === 'crossingNight') { chance = Math.max(0.05, Math.min(0.9, chance + crossingRiskModifier)); crossingRiskModifier = 0; }
+      if (Math.random() < chance) {
+        const r2 = computeAndApplyCost(costObj.risk.penalty);
+        failedStat = failedStat || r2.failedStat;
+        deltasList.push(r2.deltas);
+        luckStreak = 0;
+        const lossDesc = describeDeltas(r2.deltas);
+        showToast(hudLabel('game.luckyBad') + (lossDesc ? ' (\u2212' + lossDesc + ')' : ''), 'bad');
+        triggerFlash('#a33b2e', 450);
+        sfxLuckyBad();
+      } else {
+        luckStreak++;
+        if (luckStreak >= 2) {
+          showToast(hudLabel('game.streak').replace('{n}', luckStreak), 'good');
+          if (canvas) spawnParticles('confetti', canvas.width, canvas.height * 0.5);
+        } else {
+          showToast(hudLabel('game.luckyGood'), 'good');
+        }
+        triggerFlash('#a4823f', 350);
+        sfxLuckyGood();
+      }
+    }
+    finalizeStatChanges(deltasList);
+    let actualNext = next;
+    if (failedStat === 'health') actualNext = 'gameOverHealth';
+    else if (failedStat === 'money') actualNext = 'gameOverMoney';
+    else if (failedStat === 'time') actualNext = 'gameOverTime';
+    stage.classList.remove('visible');
+    startWalkOut(() => {
+      gameNode = actualNext;
+      startWalkIn(gameScenes[gameNode] || 'night');
+    });
+  }
+
+  function startWalkIn(scene) {
+    gameAnim.scene = scene;
+    gameAnim.phase = 'walkIn';
+    gameAnim.phaseStart = performance.now();
+  }
+  function startWalkOut(callback) {
+    gameAnim.phase = 'walkOut';
+    gameAnim.phaseStart = performance.now();
+    gameAnim.walkOutCallback = callback;
+  }
+
+  // ---- quick-time challenge (border crossing) ----
+  function showQuickTime() {
+    if (!stage) return;
+    crossingQTDone = true;
+    inQuickTime = true;
+    const target = 10;
+    const seconds = 4;
+    let count = 0;
+    let done = false;
+    stage.innerHTML =
+      `<span class="kicker">${hudLabel('game.qtPrompt')}</span>` +
+      `<div class="qt-wrap">` +
+        `<div class="qt-counter" id="qt-counter">0 / ${target}</div>` +
+        `<div class="qt-bar-track"><div class="qt-bar-fill" id="qt-bar"></div></div>` +
+        `<button class="qt-tap-btn" id="qt-tap">${hudLabel('game.qtButton')}</button>` +
+      `</div>`;
+    stage.classList.add('visible');
+    const bar = document.getElementById('qt-bar');
+    const counterEl = document.getElementById('qt-counter');
+    const tapBtn = document.getElementById('qt-tap');
+    requestAnimationFrame(() => {
+      bar.style.transition = `width ${seconds}s linear`;
+      bar.style.width = '0%';
+    });
+    const timeoutId = setTimeout(() => finish(false), seconds * 1000);
+    function finish(success) {
+      if (done) return;
+      done = true;
+      inQuickTime = false;
+      clearTimeout(timeoutId);
+      tapBtn.disabled = true;
+      crossingRiskModifier = success ? -0.25 : 0.2;
+      showToast(hudLabel(success ? 'game.qtSuccess' : 'game.qtFail'), success ? 'good' : 'bad');
+      if (success) { sfxLuckyGood(); triggerFlash('#a4823f', 350); }
+      else { sfxLuckyBad(); triggerFlash('#a33b2e', 350); }
+      setTimeout(() => { stage.classList.remove('visible'); setTimeout(showDialogueForCurrentNode, 150); }, 500);
+    }
+    tapBtn.addEventListener('click', () => {
+      if (done) return;
+      count++;
+      playTone(300 + count * 25, 0.07, 'square', 0.07);
+      counterEl.textContent = `${count} / ${target}`;
+      counterEl.classList.remove('bump');
+      void counterEl.offsetWidth;
+      counterEl.classList.add('bump');
+      if (count >= target) finish(true);
+    });
+  }
+
+  // ---- title screen ----
+  function showTitleScreen() {
+    if (!stage) return;
+    stage.innerHTML =
+      `<span class="kicker">${hudLabel('game.startEyebrow')}</span>` +
+      `<h3>${hudLabel('game.startTitle')}</h3>` +
+      `<p>${hudLabel('game.startTagline')}</p>` +
+      `<div class="title-btn-wrap"><button class="qt-tap-btn" id="game-begin">${hudLabel('game.startBtn')}</button></div>`;
+    stage.classList.add('visible');
+    const beginBtn = document.getElementById('game-begin');
+    if (beginBtn) beginBtn.addEventListener('click', () => {
+      sfxClick();
+      stage.classList.remove('visible');
+      startWalkIn(gameScenes.prologue);
+    });
+  }
+  showTitleScreen();
+
+  function gameLoop(now) {
+    if (canvas && ctx) {
+      const w = canvas.width, h = canvas.height;
+      let shakeX = 0, shakeY = 0;
+      if (now < gameAnim.shakeUntil) {
+        const remaining = (gameAnim.shakeUntil - now) / (gameAnim.shakeUntil - gameAnim.shakeStart);
+        const mag = 6 * remaining;
+        shakeX = (Math.random() * 2 - 1) * mag;
+        shakeY = (Math.random() * 2 - 1) * mag;
+      }
+      ctx.save();
+      ctx.translate(shakeX, shakeY);
+      drawScene(w, h, gameAnim.scene);
+      const groundY = h * 0.82;
+      const t = now - gameAnim.phaseStart;
+      if (gameAnim.phase === 'title') {
+        drawWalkers(w/2, groundY, false, now);
+      } else if (gameAnim.phase === 'walkIn') {
+        const dur = walkInDur;
+        const p = Math.min(t / dur, 1);
+        const x = -40 + p * (w/2 - (-40));
+        drawWalkers(x, groundY, true, now);
+        if (p >= 1) {
+          gameAnim.phase = 'idle';
+          sfxArrive();
+          if (gameNode === 'crossingNight' && !crossingQTDone) showQuickTime();
+          else showDialogueForCurrentNode();
+        }
+      } else if (gameAnim.phase === 'idle') {
+        drawWalkers(w/2, groundY, false, now);
+      } else if (gameAnim.phase === 'walkOut') {
+        const dur = walkOutDur;
+        const p = Math.min(t / dur, 1);
+        const x = w/2 + p * (w + 40 - w/2);
+        drawWalkers(x, groundY, true, now);
+        if (p >= 1) {
+          gameAnim.phase = 'idle';
+          const cb = gameAnim.walkOutCallback;
+          gameAnim.walkOutCallback = null;
+          if (cb) cb();
+        }
+      }
+      updateAndDrawParticles(w, h);
+      if (gameAnim.flashColor && now < gameAnim.flashUntil) {
+        const total = gameAnim.flashUntil - gameAnim.flashStart;
+        const elapsed = now - gameAnim.flashStart;
+        ctx.globalAlpha = Math.max(0, 0.3 * (1 - elapsed / total));
+        ctx.fillStyle = gameAnim.flashColor;
+        ctx.fillRect(0, 0, w, h);
+        ctx.globalAlpha = 1;
+      }
+      ctx.restore();
+    }
+    requestAnimationFrame(gameLoop);
+  }
+  requestAnimationFrame(gameLoop);
+  updateHUD();
+
+  const gameRestartBtn = document.getElementById('game-restart');
+  if (gameRestartBtn) {
+    gameRestartBtn.addEventListener('click', () => {
+      sfxClick();
+      if (stage) stage.classList.remove('visible');
+      resetStats();
+      crossingQTDone = false;
+      crossingRiskModifier = 0;
+      luckStreak = 0;
+      startWalkOut(() => {
+        gameNode = 'prologue';
+        startWalkIn(gameScenes.prologue);
+      });
+    });
+  }
+
+  // ---- scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
